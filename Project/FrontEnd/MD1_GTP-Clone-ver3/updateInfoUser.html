@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Xác nhận thông tin tài khoản</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto:ital,wght@0,500;0,700;1,300&display=swap"
+            rel="stylesheet" />
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" />
+        <!--     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/base.css" />
+        <link
+            rel="stylesheet"
+            href="fonts/fontawesome-free-6.2.0-web/css/all.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
+        <script src="script/User.js"></script>
+    </head>
+
+    <body>
+        <div class="app">
+            <!-- Header -->
+            <div class="header">
+                <div id="header" class="header-navbar__contact">
+                    <div class="header-navbar__contact-item">
+                        <i class="fa-sharp fa-solid fa-house-chimney"></i>
+                        <a href="">Hệ thống cửa hàng</a>
+                    </div>
+                    <div class="header-navbar__contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="">Mua hàng online: 0969436769</a>
+                    </div>
+                </div>
+                <div
+                    id="navbar"
+                    class="header-navbar-feat header-navbar-feat--index">
+                    <div class="grid">
+                        <div class="header-navbar-container">
+                            <div class="header-navbar-item">
+                                <div class="header-navbar__logo">
+                                    <a href="index.html">
+                                        <img
+                                            src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"
+                                            alt="" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="header-navbar-feature-container">
+                                <div class="header-navbar-item">
+                                    <ul class="header-navbar__lists-item">
+                                        <li>
+                                            <a href=""
+                                                >Sản phẩm
+                                                <i
+                                                    class="fa-solid fa-angle-down"></i
+                                            ></a>
+                                        </li>
+                                        <li><a href="">Sản phẩm mới</a></li>
+                                        <li>
+                                            <a href=""
+                                                >Thương hiệu
+                                                <i
+                                                    class="fa-solid fa-angle-down"></i
+                                            ></a>
+                                        </li>
+                                        <li><a href="">Blog</a></li>
+                                        <li>
+                                            <a href=""
+                                                >Giới thiệu
+                                                <i
+                                                    class="fa-solid fa-angle-down"></i
+                                            ></a>
+                                        </li>
+                                        <li><a href="">Liên hệ</a></li>
+                                    </ul>
+                                </div>
+                                <div class="header-navbar-item">
+                                    <ul class="header-navbar__features">
+                                        <li class="nav-search">
+                                            <span
+                                                ><i class="bi bi-search"></i
+                                            ></span>
+                                            <div class="nav-search-container">
+                                                <input
+                                                    placeholder="Tìm kiếm..."
+                                                    type="text" />
+                                                <button>
+                                                    <i
+                                                        class="fa-solid fa-magnifying-glass"></i>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li class="nav-account">
+                                            <span
+                                                ><i
+                                                    class="bi bi-person-circle"></i>
+                                                <span class="nav-acc-info"
+                                                    >Tài khoản</span
+                                                ></span
+                                            >
+                                            <!-- Regis & Login -->
+                                            <div class="nav-account-container">
+                                                <a
+                                                    class="sign-up account-info"
+                                                    href="register.html"
+                                                    >Đăng kí</a
+                                                >
+                                                <a
+                                                    class="sign-in account-cart"
+                                                    href="login.html"
+                                                    >Đăng nhập</a
+                                                >
+                                                <a
+                                                    onclick="logOut()"
+                                                    class="logOut"
+                                                    href="login.html"></a>
+                                            </div>
+                                        </li>
+                                        <li class="mini-cart-contain">
+                                            <a href="cart-products.html">
+                                                <span
+                                                    ><i
+                                                        class="bi bi-bag-fill"></i>
+                                                    Giỏ hàng</span
+                                                ><span id="count"></span
+                                            ></a>
+                                            <div class="mini-cart">
+                                                <h3>Thông tin giỏ hàng</h3>
+                                                <div
+                                                    id="showMiniCart"
+                                                    class="mini-cart-body"></div>
+                                                <div class="mini-cart-footer">
+                                                    <p
+                                                        class="mini-cart__products-remain">
+                                                        Còn
+                                                        <span
+                                                            id="productsRemain"></span>
+                                                        sản phẩm
+                                                    </p>
+                                                    <a href="cart-products.html"
+                                                        >Xem giỏ hàng</a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="path">
+                <div class="grid">
+                    <h1>
+                        <a
+                            style="
+                                text-decoration: none;
+                                color: var(--primay-color);
+                            "
+                            href="index.html"
+                            >Trang chủ</a
+                        >
+                        /
+                        <a
+                            style="
+                                text-decoration: none;
+                                color: var(--primay-color);
+                            "
+                            href="account-information.html"
+                            >Thông tin tài khoản</a
+                        >
+                        / Xác nhận thông tin tài khoản
+                    </h1>
+                </div>
+            </div>
+            <div class="register">
+                <div class="register-title">
+                    <h1><span>Xác nhận</span> tài khoản</h1>
+                </div>
+                <div class="register-form">
+                    <div class="register-form__item">
+                        <input
+                            name="fName"
+                            oninput="validate()"
+                            id="firstName"
+                            placeholder="Họ"
+                            type="text" />
+                        <span id="validateFName"></span>
+                    </div>
+                    <div class="register-form__item">
+                        <input
+                            name="lName"
+                            oninput="validate()"
+                            id="lastName"
+                            placeholder="Tên"
+                            type="text" />
+                        <span id="validateLName"></span>
+                    </div>
+                    <form
+                        onclick="getGender()"
+                        id="gender"
+                        class="register-form__radio-input">
+                        <label
+                            for="radio1"
+                            class="register-form__radio-input-item">
+                            <input
+                                value="male"
+                                id="radio1"
+                                name="gender"
+                                type="radio" /><span> Nam</span>
+                        </label>
+                        <label
+                            for="radio2"
+                            class="register-form__radio-input-item">
+                            <input
+                                value="female"
+                                id="radio2"
+                                name="gender"
+                                type="radio" /><span> Nữ</span>
+                        </label>
+                        <span id="validateGender"></span>
+                    </form>
+                    <div class="register-form__item">
+                        <input
+                            name="birth"
+                            oninput="validate()"
+                            id="birth"
+                            placeholder="mm/dd/yy"
+                            type="date"
+                            style="cursor: text" />
+                        <span id="validateBirth"></span>
+                    </div>
+                    <div class="register-form__item">
+                        <input
+                            disabled
+                            value="trongnhan34vn@gmail.com"
+                            name="email"
+                            oninput="validate()"
+                            id="email"
+                            placeholder="Email"
+                            type="email" />
+                        <span id="validateEmail"></span>
+                    </div>
+                    <div class="register-form__item">
+                        <input
+                            name="password"
+                            oninput="validate()"
+                            id="current-password"
+                            placeholder="Mật khẩu hiện tại"
+                            type="password" />
+                        <span id="validateCurrentPassword"></span>
+                    </div>
+                    <div class="register-form__item">
+                        <input
+                            name="re-password"
+                            oninput="validate()"
+                            id="new-password"
+                            placeholder="Mật khẩu mới"
+                            type="password" />
+                        <span id="validateNewPassword"></span>
+                    </div>
+                    <div class="register-form__item">
+                        <input
+                            name="re-password"
+                            oninput="validate()"
+                            id="re-newpassword"
+                            placeholder="Nhập lại mật khẩu"
+                            type="password" />
+                        <span id="validateReNewPassword"></span>
+                    </div>
+                    <p>
+                        This site is protected by reCAPTCHA and the Google
+                        <a href="">Privacy Policy</a> and
+                        <a href="">Terms of Service</a> apply.
+                    </p>
+                    <div class="action-button button dark">
+                        <button onclick="saveInfo()" class="btn">
+                            Lưu lại
+                        </button>
+                    </div>
+                    <div class="register-back-index">
+                        <a href="index.html"
+                            ><i class="fa-solid fa-arrow-left-long"></i
+                            ><span>Quay lại trang chủ</span></a
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="grid">
+                    <div class="footer-container">
+                        <div class="footer-logo">
+                            <img
+                                src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"
+                                alt="" />
+                        </div>
+                        <ul class="footer-social">
+                            <li>
+                                <a href=""><i class="bi bi-youtube"></i></a>
+                            </li>
+                            <li>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href=""><i class="bi bi-twitter"></i></a>
+                            </li>
+                        </ul>
+                        <div class="footer-copyright">
+                            <h3>© 2021 GUITARPLUS • ALL RIGHTS RESERVED</h3>
+                        </div>
+                        <ul class="footer-link">
+                            <li><a href="">Trang chủ</a></li>
+                            <li><a href="">Sản phẩm</a></li>
+                            <li><a href="">Thương hiệu</a></li>
+                            <li><a href="">Blog</a></li>
+                            <li><a href="">Giới thiệu</a></li>
+                            <li><a href="">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let firstName;
+            let lastName;
+            let birth;
+            let currentPassword;
+            let newPassword;
+            let reNewPassword;
+            let checkValidate = false;
+            let currentUser = JSON.parse(localStorage.getItem("current_user"));
+            let email = currentUser.email;
+            let listUsers = JSON.parse(localStorage.getItem("list_user"));
+            if (listUsers == null) {
+                listUsers = [];
+            }
+            let gender = currentUser.gender;
+
+            document.getElementById("email").value = email;
+            document.getElementById("firstName").value = currentUser.firstName;
+            document.getElementById("lastName").value = currentUser.lastName;
+            document.getElementById("birth").value = currentUser.birth;
+            document.querySelector(".nav-acc-info").innerHTML =
+                currentUser.firstName + " " + currentUser.lastName;
+
+            function getGender() {
+                gender = document.querySelector(
+                    "input[name = gender]:checked"
+                ).value;
+                console.log(gender);
+                // Check Validate Gender
+                if (gender.trim() == "") {
+                    gender = "";
+                    checkValidate = false;
+                    document.getElementById("validateGender").innerHTML =
+                        "Gender is required!";
+                } else {
+                    checkValidate = true;
+                    document.getElementById("validateGender").innerHTML = "";
+                }
+            }
+
+            function validate() {
+                currentPassword =
+                    document.getElementById("current-password").value;
+                newPassword = document.getElementById("new-password").value;
+                reNewPassword = document.getElementById("re-newpassword").value;
+
+                // Kiểm tra bỏ trống pass hiện tại
+                if (currentPassword == "") {
+                    checkValidate = false;
+                    document.getElementById(
+                        "validateCurrentPassword"
+                    ).innerHTML = "Current Password is required!";
+                    return;
+                } else {
+                    checkValidate = true;
+                    document.getElementById(
+                        "validateCurrentPassword"
+                    ).innerHTML = "";
+                }
+                // Kiểm tra điều kiện password mới
+                if (newPassword == "") {
+                    checkValidate = false;
+                    document.getElementById("validateNewPassword").innerHTML =
+                        "Please enter new password!";
+                    return;
+                } else {
+                    if (newPassword.length < 8) {
+                        checkValidate = false;
+                        document.getElementById(
+                            "validateNewPassword"
+                        ).innerHTML =
+                            "Use 8 or more characters for your password!";
+                        return;
+                    } else {
+                        if (newPassword == currentPassword) {
+                            checkValidate = false;
+                            document.getElementById(
+                                "validateNewPassword"
+                            ).innerHTML =
+                                "This password is already in use! Please try another!";
+                            return;
+                        } else {
+                            checkValidate = true;
+                            document.getElementById(
+                                "validateNewPassword"
+                            ).innerHTML = "";
+                        }
+                    }
+                }
+                //     Kiểm tra re-password mới
+                if (reNewPassword !== newPassword) {
+                    checkValidate = false;
+                    document.getElementById("validateReNewPassword").innerHTML =
+                        "Re-password is not matched!";
+                    return;
+                } else {
+                    checkValidate = true;
+                    document.getElementById("validateReNewPassword").innerHTML =
+                        "";
+                }
+            }
+
+            console.log(gender);
+
+            function saveInfo() {
+                firstName = document.getElementById("firstName").value;
+                lastName = document.getElementById("lastName").value;
+                birth = document.getElementById("birth").value;
+                let check = false;
+                if (checkValidate) {
+                    if (currentPassword !== currentUser.password) {
+                        check = false;
+                        document.getElementById(
+                            "validateCurrentPassword"
+                        ).innerHTML = "Wrong password! Please try again!";
+                        return;
+                    } else {
+                        check = true;
+                        document.getElementById(
+                            "validateCurrentPassword"
+                        ).innerHTML = "";
+                    }
+                    if (check) {
+                        checkValidate = true;
+                        currentUser.password = newPassword;
+                        console.log(currentUser.password);
+                        if (firstName !== "") {
+                            currentUser.firstName = firstName;
+                        }
+                        if (lastName !== "") {
+                            currentUser.lastName = lastName;
+                        }
+                        if (birth !== "") {
+                            currentUser.birth = birth;
+                        }
+                        if (gender !== "") {
+                            currentUser.gender = gender;
+                        }
+                        // Thay pass trên listUser
+
+                        for (let i = 0; i < listUsers.length; i++) {
+                            if (currentUser.id == listUsers[i].id) {
+                                listUsers[i].password = currentUser.password;
+                                listUsers[i].firstName = currentUser.firstName;
+                                listUsers[i].lastName = currentUser.lastName;
+                                listUsers[i].birth = currentUser.birth;
+                                listUsers[i].gender = currentUser.gender;
+                            }
+                        }
+                    }
+                    localStorage.removeItem("list_user");
+                    localStorage.setItem(
+                        "list_user",
+                        JSON.stringify(listUsers)
+                    );
+                    localStorage.removeItem("current_user");
+                    localStorage.setItem(
+                        "current_user",
+                        JSON.stringify(currentUser)
+                    );
+                    location.href = "validateUser.html";
+                } else {
+                    document.getElementById(
+                        "validateCurrentPassword"
+                    ).innerHTML = "Please input current password!";
+                    document.getElementById("validateNewPassword").innerHTML =
+                        "Please input new password!";
+                    document.getElementById("validateReNewPassword").innerHTML =
+                        "Please input re-newpassword!";
+                }
+            }
+
+            let cartList = JSON.parse(localStorage.getItem("cartList"));
+            if (cartList == null) {
+                cartList = [];
+            }
+
+            function getCartUser() {
+                let cartCurrentUser = [];
+                if (currentUser !== null) {
+                    for (let i = 0; i < cartList.length; i++) {
+                        if (cartList[i].userId == currentUser.id) {
+                            cartCurrentUser.push(cartList[i]);
+                        }
+                    }
+                }
+                return cartCurrentUser;
+            }
+
+            // Tính tổng sản phẩm trong giỏ hàng "countProducts", sản phẩm còn lại trong giỏ "remainP"
+
+            function countProducts() {
+                let remainProduct = 0;
+                let countProducts = 0;
+                let cartCurrentUser = getCartUser();
+                if (currentUser !== null) {
+                    for (let i = 0; i < cartCurrentUser.length; i++) {
+                        if (cartCurrentUser[i].userId == currentUser.id) {
+                            countProducts += cartCurrentUser[i].quantity;
+                        }
+                    }
+                }
+                if (cartCurrentUser.length < 4) {
+                    remainProduct = 0;
+                } else {
+                    remainProduct = countProducts - 4;
+                }
+
+                document.getElementById("count").innerHTML = countProducts;
+                document.getElementById("productsRemain").innerHTML =
+                    remainProduct;
+            }
+
+            countProducts();
+
+            //  Vẽ minicart
+
+            function showMiniCart() {
+                let size;
+                let showMiniCart = "";
+                let cartCurrentUser = getCartUser();
+
+                if (currentUser !== null) {
+                    size =
+                        cartCurrentUser.length >= 4
+                            ? 4
+                            : cartCurrentUser.length;
+                    for (let i = 0; i < size; i++) {
+                        showMiniCart += `<a href="cart-products.html" class="mini-cart-item">
+                                                <div class="mini-cart-products">
+                                                    <div class="mini-cart-img-contain">
+                                                        <img src=${
+                                                            cartCurrentUser[i]
+                                                                .image
+                                                        } alt="">
+                                                    </div>
+                                                    <h3>${
+                                                        cartCurrentUser[i].name
+                                                    }</h3>
+                                                </div>
+                                                <div class="mini-cart-price">
+                                                    <p>${formatNumber(
+                                                        cartCurrentUser[i].price
+                                                    )}</p>
+                                                </div>
+                                            </a>`;
+                    }
+                }
+                document.getElementById("showMiniCart").innerHTML =
+                    showMiniCart;
+            }
+
+            showMiniCart();
+
+            function formatNumber(number) {
+                return new Intl.NumberFormat("de-DE", {
+                    style: "currency",
+                    currency: "VND",
+                }).format(number);
+            }
+
+            if (currentUser !== null) {
+                document.querySelector(".account-info").innerHTML =
+                    "Thông tin tài khoản";
+                document.querySelector(".account-info").href =
+                    "account-information.html";
+                document.querySelector(".account-cart").innerHTML = "Giỏ hàng";
+                document.querySelector(".logOut").innerHTML = "Đăng xuất";
+                document.querySelector(".logOut").style.color = "red";
+                document.querySelector(".account-cart").href =
+                    "cart-products.html";
+            } else {
+                document.querySelector(".logOut").style.display = "none";
+                document.getElementById("cart-product").href = "login.html";
+                document.getElementById("mini-cart-product").href =
+                    "login.html";
+            }
+
+            function logOut() {
+                localStorage.removeItem("current_user");
+                localStorage.removeItem("idKey");
+                location.href = "login.html";
+            }
+        </script>
+        <script src="script/fixedBar.js"></script>
+        <script src="/script/checkUser.js"></script>
+    </body>
+</html>

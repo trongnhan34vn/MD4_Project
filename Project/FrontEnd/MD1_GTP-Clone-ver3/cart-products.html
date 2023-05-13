@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ hàng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto:ital,wght@0,500;0,700;1,300&display=swap"
+        rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" />
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="fonts/fontawesome-free-6.2.0-web/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
+    <script src="script/User.js"></script>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-navbar__contact">
+                <div class="header-navbar__contact-item">
+                    <i class="fa-sharp fa-solid fa-house-chimney"></i>
+                    <a href="">Hệ thống cửa hàng</a>
+                </div>
+                <div class="header-navbar__contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="">Mua hàng online: 0969436769</a>
+                </div>
+            </div>
+            <div class="header-navbar-feat">
+                <div class="grid">
+                    <div class="header-navbar-container header-navbar-container--cart">
+                        <div class="header-navbar-cart-item">
+                            <div class="header-navbar-item">
+                                <div class="header-navbar__logo">
+                                    <a href="index.html">
+                                        <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"
+                                            alt="" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="header-navbar-item">
+                                <h1 class="header-navbar-cart-item">
+                                    Shopping Cart
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="header-navbar-item header-navbar-cart__user">
+                            <ul class="header-navbar__features">
+                                <li class="nav-account">
+                                    <span><i class="bi bi-person-circle"></i><span id="account">Tài khoản</span></span>
+                                    <!-- Regis & Login -->
+                                    <div class="nav-account-container nav-account-container--cart-products">
+                                        <a class="sign-up account-info" href="#">Đăng kí</a>
+                                        <a class="sign-in account-cart" href="#">Đăng nhập</a>
+                                        <a onclick="logOut()" class="logOut" href="login.html"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="path path-">
+            <div class="grid">
+                <h1>
+                    <a style="
+                                text-decoration: none;
+                                color: var(--primay-color);
+                            " href="index.html">Trang chủ</a>
+                    / Giỏ hàng
+                </h1>
+            </div>
+        </div>
+        <div class="register product-lists">
+            <div class="grid">
+                <div class="product-list-wrap">
+                    <table class="products-table" style="width: 100%">
+                        <tr style="
+                                    height: 50px;
+                                    border-bottom: 1px solid #f5f6f9;
+                                ">
+                            <th width="50%" colspan="3">Products</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Actions</th>
+                        </tr>
+                        <tbody id="draw-table">
+                            <!--                <tr>-->
+                            <!--                    <td>-->
+                            <!--                        <img style="width: 80px"-->
+                            <!--                             src="https://product.hstatic.net/200000388065/product/859cf541-b3c3-40bc-a43c-2ab90feb1e55_6f98e69436884d77a3cf97a4b0f9683f_large.jpg"-->
+                            <!--                             alt="">-->
+                            <!--                        <p style="padding: 10px">Amp Marshal MG10G 10W</p>-->
+                            <!--                    </td>-->
+                            <!--                    <td>2.000.000đ</td>-->
+                            <!--                    <td>1</td>-->
+                            <!--                    <td></td>-->
+                            <!--                    <td>-->
+                            <!--                        <button>delete</button>-->
+                            <!--                    </td>-->
+                            <!--                </tr>-->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div id="check-cart" class="check-out">
+                    <div class="check-out-select">
+                        <input onchange="checkAllInput()" id="checkAllInput" style="width:20px;" type="checkbox">
+                        <h1>Select All</span>
+                    </div>
+                    <div class="check-out-bill">
+                        <div class="check-out-total-price">
+                            <div class="total-price">
+                                <h1>
+                                    Total: <span id="totalPrice"></span>
+                                </h1>
+                            </div>
+                            <div class="check-out-button">
+                                <button id="checkOutBtn" onclick="checkOut()" class="btn">
+                                    Check Out
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="toast">
+                    <!-- <div class="toast-message">
+                            <div class="toast-icon">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            </div>
+                            <div class="toast-body">
+                                <h3>
+                                    Chưa có sản phẩm nào trong giỏ hàng! Mua sắm
+                                    thôi!
+                                </h3>
+                            </div>
+                            <div onclick="closeToast()" class="toast-close">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                        </div> -->
+                </div>
+            </div>
+        </div>
+
+        <div id="footer" class="footer">
+            <div class="grid">
+                <div class="footer-container">
+                    <div class="footer-logo">
+                        <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" alt="" />
+                    </div>
+                    <ul class="footer-social">
+                        <li>
+                            <a href=""><i class="bi bi-youtube"></i></a>
+                        </li>
+                        <li>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href=""><i class="bi bi-twitter"></i></a>
+                        </li>
+                    </ul>
+                    <div class="footer-copyright">
+                        <h3>© 2021 GUITARPLUS • ALL RIGHTS RESERVED</h3>
+                    </div>
+                    <ul class="footer-link">
+                        <li><a href="">Trang chủ</a></li>
+                        <li><a href="">Sản phẩm</a></li>
+                        <li><a href="">Thương hiệu</a></li>
+                        <li><a href="">Blog</a></li>
+                        <li><a href="">Giới thiệu</a></li>
+                        <li><a href="">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let currentUser = JSON.parse(localStorage.getItem("current_user"));
+
+        // Kiểm tra đăng nhập
+        if (currentUser !== null) {
+            document.getElementById("account").innerHTML =
+                currentUser.firstName + " " + currentUser.lastName;
+            document.querySelector(".account-info").innerHTML =
+                "Thông tin tài khoản";
+            document.querySelector(".account-cart").innerHTML = "Giỏ hàng";
+            document.querySelector(".logOut").innerHTML = "Đăng xuất";
+            document.querySelector(".logOut").style.color = "red";
+            document.querySelector(".account-info").href =
+                "account-information.html";
+        } else {
+            document.querySelector(".logOut").style.display = "none";
+        }
+
+        function logOut() {
+            localStorage.removeItem("current_user");
+            location.href = "login.html";
+        }
+
+        let listProducts = JSON.parse(localStorage.getItem("list_product"));
+        let cartList = JSON.parse(localStorage.getItem("cartList"));
+        if (cartList == null) {
+            cartList = [];
+        } else {
+            cartList = Object.values(cartList);
+        }
+
+        // vẽ sản phẩm vào giỏ hàng
+        let cartCurrentUser = [];
+        for (let index = 0; index < cartList.length; index++) {
+            if (cartList[index].userId == currentUser.id) {
+                cartCurrentUser.push(cartList[index]);
+            }
+        }
+
+        let drawTable;
+
+        function showCart() {
+            let total;
+            //cach 1 , dùng phuong thuc reduce
+            total = cartList.reduce(function (total, obj) {
+                if (obj.userId == currentUser.id) {
+                    return total + obj.price * obj.quantity;
+                } else return total;
+                // obj => obj.price * obj.quantity
+            }, 0);
+            drawTable = "";
+            if (cartCurrentUser.length == 0) {
+                drawTable = `<tr>
+                            <td colspan="7" height="500">
+                            <h1 style="color: #ccc; text-align: center; width: 100%"> CHƯA CÓ SẢN PHẨM</h1>
+                            </td>
+                        </tr>`;
+            } else {
+                for (let i = 0; i < cartList.length; i++) {
+                    if (cartList[i].userId == currentUser.id) {
+                        drawTable += `<tr id="deleteTable">
+                        <td>
+                            <input data-quantity="${cartList[i].quantity}" id="${cartList[i].id}" name="point" onchange="checkInput(${cartList[i].id})" type="checkbox" class="check-btn" data-price="${cartList[i].price}"/>
+                        </td>
+                        <td>
+                            <img style="width: 80px"
+                                 src=${cartList[i].image}
+                                 alt="">
+                        </td>
+                        <td>
+                            <p style="font-weight: bold; text-align: left;">${cartList[i].name
+                            }</p>
+                        </td>
+                        <td style="color: red;">${formatNumber(
+                                cartList[i].price
+                            )}</td>
+                        <td><input min="1" oninput="changeQuantity(${cartList[i].id
+                            })" style="text-align: center" id="qt + ${cartList[i].id
+                            }" value="${cartList[i].quantity
+                            }" type="number"></td>
+                        <td style="color: red;" class="total" id="id + ${cartList[i].id
+                            }">${formatNumber(
+                                cartList[i].price * cartList[i].quantity
+                            )}</td>
+                        <td>
+                            <button onclick="deleteProduct(${cartList[i].id
+                            })">Delete</button>
+                        </td>
+                    </tr>`;
+                    }
+                }
+            }
+            document.getElementById("draw-table").innerHTML = drawTable;
+            document.getElementById("totalPrice").innerText = formatNumber(0);
+        }
+
+        showCart();
+
+        // Thay đổi số lượng trong ô input
+
+        function changeQuantity(index) {
+            
+            let getIndexTdinput = "qt" + " + " + index.toString();
+            // getIndexTd += test;
+            let fixQuantity =
+                +document.getElementById(getIndexTdinput).value;
+            if(fixQuantity > 0) {
+                for (let i = 0; i < cartList.length; i++) {
+                    if (
+                        cartList[i].id == index &&
+                        cartList[i].userId == currentUser.id
+                    ) {
+                        cartList[i].quantity = fixQuantity;
+                        break;
+                    }
+                }
+            } else {
+                if(fixQuantity <= 0) {
+                    fixQuantity = 1;
+                    cartList.quantity =fixQuantity;
+                }
+            }
+            localStorage.removeItem("cartList");
+            localStorage.setItem("cartList", JSON.stringify(cartList));
+            showCart();
+        }
+
+        // Tìm kiếm
+        // let listSearch = [];
+        // let checkOutBtn = true;
+        // function actionSearch() {
+        //     let productSearch =
+        //         document.getElementById("searchProduct").value;
+        //         console.log(productSearch);
+        //     if (productSearch.trim() == "") {
+        //         checkOutBtn = true;
+        //         showCart();
+        //     } else {
+        //         listSearch = [];
+        //         for (let i = 0; i < cartList.length; i++) {
+        //             if (
+        //                 cartList[i].name
+        //                     .toLowerCase()
+        //                     .search(productSearch.toLowerCase()) !== -1 &&
+        //                 cartList[i].userId == currentUser.id
+        //             ) {
+        //                 listSearch.push(cartList[i]);
+        //             }
+        //         }
+        //         showListSearch();
+        //         checkOutBtn = false;
+        //         return checkOutBtn;
+        //     }
+        // }
+
+        // function showListSearch() {
+        //     let total;
+        //     //cach 1 , dùng phuong thuc map
+        //     total = listSearch.reduce(function (total, obj) {
+        //         return total + obj.price * obj.quantity; // obj => obj.price * obj.quantity
+        //     }, 0);
+        //     drawTable = "";
+        //     if (listSearch.length == 0) {
+        //         drawTable = `<tr>
+        //                 <td colspan="6" height="500">
+        //                 <h1 style="color: #ccc; text-align: center; width: 100%"> CHƯA CÓ SẢN PHẨM</h1>
+        //                 </td>
+        //             </tr>`;
+        //     } else {
+        //             for (let i = 0; i < listSearch.length; i++) {
+        //                 drawTable += `<tr id="deleteTable">
+        //                 <td>
+        //                     <input data-quantity="${listSearch[i].quantity}" id="${listSearch[i].id}" name="point" onchange="checkInput(${listSearch[i].id})" type="checkbox" class="check-btn" data-price="${listSearch[i].price}"/>
+        //                 </td>
+        //                 <td>
+        //                     <img style="width: 80px"
+        //                          src=${listSearch[i].image}
+        //                          alt="">
+        //                 </td>
+        //                 <td>
+        //                     <p style="font-weight: bold; text-align: left;">${
+        //                         listSearch[i].name
+        //                     }</p>
+        //                 </td>
+        //                 <td style="color: red" id="price">${formatNumber(
+        //                     listSearch[i].price
+        //                 )}</td>
+        //                 <td><input style="text-align: center" oninput="changeQuantityListSearch(${listSearch[i].id})" id="ct + ${
+        //                     listSearch[i].id
+        //                 }" value="${
+        //                     listSearch[i].quantity
+        //                 }" type="number"></td>
+        //                 <td style="color: red">${formatNumber(
+        //                     listSearch[i].price * listSearch[i].quantity
+        //                 )}</td>
+        //                 <td>
+        //                     <button onclick="deleteProduct(${
+        //                     listSearch[i].id
+        //                 })">Delete</button>       
+        //                 </td>
+        //             </tr>`;
+        //         }
+        //     }
+        //     document.getElementById("draw-table").innerHTML = drawTable;
+        //     document.getElementById("totalPrice").innerHTML = formatNumber(0);
+        // }
+
+        // Fix Lỗi Change qquantity list Search
+
+        // function changeQuantityListSearch(index) {
+        //     let getIndexCTinput = "ct" + " + " + index.toString();
+        //     let fixQuantity =
+        //         +document.getElementById(getIndexCTinput).value;
+        //     for (let i = 0; i < cartList.length; i++) {
+        //         if (
+        //             cartList[i].id == index &&
+        //             cartList[i].userId == currentUser.id
+        //         ) {
+        //             cartList[i].quantity = fixQuantity;
+        //             break;
+        //         }
+        //     }
+        //     localStorage.removeItem("cartList");
+        //     localStorage.setItem("cartList", JSON.stringify(cartList));
+        //     showListSearch();
+        // }
+
+        // Checkbox input 
+        let allInput = document.getElementById("checkAllInput");
+        let getCheckAll = document.getElementsByClassName("check-btn");
+        let totalPrice = 0;
+        function checkInput(id) {
+            let checkInput = document.getElementById(id);
+            if (checkInput.checked == true) {
+                totalPrice += parseInt(checkInput.getAttribute("data-price") * checkInput.getAttribute("data-quantity"));
+                document.getElementById("totalPrice").innerHTML = formatNumber(totalPrice);
+            } else {
+                totalPrice -= parseInt(checkInput.getAttribute("data-price") * checkInput.getAttribute("data-quantity"));
+                document.getElementById("totalPrice").innerHTML = formatNumber(totalPrice);
+            }
+
+            for (let i = 0; i < getCheckAll.length; i++) {
+                if (getCheckAll[i].checked == true) {
+                    allInput.checked = true;
+                } else {
+                    allInput.checked = false;
+                    return;
+                }
+            }
+        }
+
+        function checkAllInput() {
+            for (let i = 0; i < getCheckAll.length; i++) {
+                if (allInput.checked == true) {
+                    getCheckAll[i].checked = true;
+                    totalPrice = cartList.reduce(function (sum, obj) {
+                        return totalPrice = sum + obj.price * obj.quantity;
+                    }, 0);
+                    document.getElementById('totalPrice').innerHTML = formatNumber(totalPrice);
+                } else {
+                    getCheckAll[i].checked = false;
+                    totalPrice = 0;
+                    document.getElementById('totalPrice').innerHTML = formatNumber(totalPrice);
+                }
+            }
+        }
+
+        // Xoá
+
+        function deleteProduct(index) {
+            for (let i = 0; i < cartList.length; i++) {
+                if (
+                    cartList[i].id == index &&
+                    cartList[i].userId == currentUser.id
+                ) {
+                    cartList.splice(i, 1);
+                    break;
+                }
+            }
+
+            for (let index = 0; index < cartCurrentUser.length; index++) {
+                if ((cartCurrentUser[index].userId = currentUser.id)) {
+                    cartCurrentUser.splice(index, 1);
+                    break;
+                }
+            }
+            localStorage.removeItem("current_user");
+            localStorage.setItem(
+                "current_user",
+                JSON.stringify(currentUser)
+            );
+            localStorage.removeItem("cartList");
+            localStorage.setItem("cartList", JSON.stringify(cartList));
+            if (cartCurrentUser.length == 0) {
+                location.href = "index.html";
+            }
+            showCart();
+            allInput.checked = false;
+        }
+        let cartListChecked = [];
+
+        // Xác nhận đơn hàng
+        
+        function checkOut() {
+            let listCheck = document.querySelectorAll(".check-btn:checked");
+            if (cartCurrentUser.length == 0) {
+                showToast("Chưa có sản phẩm nào trong giỏ hàng! Mua sắm thôi!")
+            } else {
+                if (cartCurrentUser.length !== 0) {
+                    if (listCheck.length == 0) {
+                        showToast("Hãy lựa chọn sản phẩm thanh toán!")
+                    } else {
+                        for (let i = 0; i < listCheck.length; i++) {
+                            for (let j = 0; j < cartList.length; j++) {
+                                console.log(cartList[j].userId);
+                                if (listCheck[i].id == cartList[j].id && cartList[j].userId == currentUser.id) {
+                                    cartListChecked.push(cartList[j]);
+                                    cartList.splice(j, 1);
+                                    for (let i = 0; i < getCheckAll.length; i++) {
+                                        getCheckAll[i].checked =  false;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        localStorage.removeItem("cartListChecked");
+                        localStorage.setItem("cartListChecked", JSON.stringify(cartListChecked));
+                        localStorage.removeItem('cartList');
+                        localStorage.setItem('cartList', JSON.stringify(cartList));
+                        location.href = "validateOrder.html";
+                    }
+                }
+            }
+        }
+
+
+        function showToast(alert) {
+            let toast = document.createElement("div");
+            toast.classList.add("toast");
+
+            const autoRemove = setTimeout(function () {
+                toast.remove();
+            }, 4000)
+
+            toast.style.animation = "slideIn ease .3s";
+            toast.innerHTML = `<div class="toast-message">
+                            <div class="toast-icon">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            </div>
+                            <div class="toast-body">
+                                <h3>
+                                    ${alert}
+                                </h3>
+                            </div>
+                            <div onclick="closeToast()" class="toast-close">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                        </div>`;
+
+            const toastList = document.querySelector('#toast');
+            toastList.appendChild(toast);
+
+            setTimeout(function () {
+                toast.style.animation = `fadeOut ease 3s forwards`;
+            }, 2000
+            )
+        }
+
+        function closeToast() {
+            let toast = document.querySelector('#toast');
+            toast.style.animation = `fadeOut ease 0.025s forwards`;
+            setTimeout(function () {
+                toast.style.animation = `fadeIn ease 1s forwards`;
+            })
+            clearTimeout()
+        }
+
+        function formatNumber(number) {
+            return new Intl.NumberFormat("de-DE", {
+                style: "currency",
+                currency: "VND",
+            }).format(number);
+        }
+    </script>
+    <script src="script/fixedBarCart.js"></script>
+    <script src="/script/checkUser.js"></script>
+</body>
+
+</html>
