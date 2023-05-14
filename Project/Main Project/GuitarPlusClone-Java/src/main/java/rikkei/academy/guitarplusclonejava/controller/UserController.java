@@ -23,7 +23,7 @@ public class UserController {
             return "/Login";
         } else {
             // email đã tồn tại -> yêu cầu đăng kí lại
-            model.addAttribute("message, Đăng kí thất bại! Email đã tồn tại! Đăng nhập hoặc Quay trở lại đăng kí")
+            model.addAttribute("message, Đăng kí thất bại! Email đã tồn tại! Đăng nhập hoặc Quay trở lại đăng kí");
             return "/Register";
         }
     }
