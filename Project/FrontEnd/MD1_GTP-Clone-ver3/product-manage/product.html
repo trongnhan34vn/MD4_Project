@@ -21,7 +21,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
 </head>
-
+    <style>
+        .create-product {
+            display: flex;
+            align-items: center;
+            justify-content: right;
+        }
+        .btn {
+            padding: 0;
+        }
+        .btn a {
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            width: 100%;
+            height: 100%;
+        }
+        .btn a span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        a:hover {
+            color: #000;
+            transition: all ease 0.3s;
+        }
+    </style>
 <body>
     <div class="app">
         <!-- Header -->
@@ -50,7 +76,7 @@
                             </div>
                             <div class="header-navbar-item">
                                 <h1 class="header-navbar-cart-item">
-                                    Admin Page
+                                    Product Management
                                 </h1>
                             </div>
                         </div>
@@ -71,52 +97,58 @@
                 </div>
             </div>
         </div>
+        <div class="path path-">
+            <div class="grid">
+                <h1>
+                    <a style="
+                                text-decoration: none;
+                                color: var(--primay-color);
+                            " href="index.html">Admin/</a>
+                    Product Managment
+                </h1>
+            </div>
+        </div>
         <div class="register product-lists">
             <div class="grid">
-                <div class="register">
-                    <div class="register-title admin-page-upgrade">
-                        <div id="imgDiv"></div>
-                        <progress value="0" max="100" id="uploader">0%</progress>
-                        <input style="width: 90px; font-size: 14px; border: none;" type="file" value="upload"
-                            accept=".jpg,.png,.webp" id="fileButton">
-                    </div>
-                    <div class="register-form login-form">
-                        <div class="register-form__item">
-                            <input id="nameProduct" placeholder="Tên sản phẩm" type="text">
-                            <span></span>
-                        </div>
-                        <div class="register-form__item">
-                            <input id="priceProduct" placeholder="Giá" type="number">
-                            <span></span>
-                        </div>
-                        <div class="action-button button dark">
-                            <button onclick="postProduct()" class="btn">Đăng sản phẩm</button>
-                        </div>
-                    </div>
+                <div class="create-product" style="margin-bottom: 20px;">
+                    <button class="btn"><a href=""><span>Create New Product</span></a></button>
                 </div>
                 <div class="product-list-wrap">
                     <table class="products-table" style="width: 100%; text-align: center;">
-                        <tr style="
+                        <thead>
+                            <tr style="
                                     height: 50px;
                                     border-bottom: 1px solid #f5f6f9;
                                 ">
-                            <th width="50%">Products</th>
-                            <th>Unit Price</th>
-                            <th>Actions</th>
-                        </tr>
+                                <th width="40%">Name</th>
+                                <th>Catalog</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
                         <tbody id="draw-table">
-                            <!-- <tr>
-                                <td>
-                                    <img style="width: 80px"
-                                        src="https://product.hstatic.net/200000388065/product/859cf541-b3c3-40bc-a43c-2ab90feb1e55_6f98e69436884d77a3cf97a4b0f9683f_large.jpg"
-                                        alt="">
-                                    <p style="padding: 10px">Amp Marshal MG10G 10W</p>
+                            <tr>
+                                <td style="vertical-align: middle;">
+                                    <div style="display: flex; align-items: center;">
+                                        <img style="width: 80px"
+                                            src="https://product.hstatic.net/200000388065/product/859cf541-b3c3-40bc-a43c-2ab90feb1e55_6f98e69436884d77a3cf97a4b0f9683f_large.jpg"
+                                            alt="">
+                                        <p style="padding: 10px; display: inline;">Amp Marshal MG10G 10W</p>
+                                    </div>
                                 </td>
-                                <td>2.000.000đ</td>
+                                <td>Guitar</td>
+                                <td>Cây đàn hay nhất việt nam</td>
+                                <td>7.000.000</td>
+                                <td>100</td>
+                                <td>còn hàng</td>
                                 <td>
-                                    <button>delete</button>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
                                 </td>
-                            </tr> -->
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -193,29 +225,30 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="overlay" id="overlay"></div>
-    <div class="modal" id="modal">
-        <button style="cursor: pointer;" class="modal-close-btn" id="close-btn"><i class="fa fa-times"
-                title="閉じる"></i></button>
-        <div style="text-align: center;" class="modal-form">
-            <div style="padding: 4px; display: inline-block; margin-bottom: 24px; border: 1px solid #f5f6f9;"
-                class="modal-product-img">
-                <img style="width: 100px" id="editImg" src="" alt="">
-            </div>
-            <div class="register-form__item">
-                <input id="editNameInput" placeholder="Tên sản phẩm" type="text">
-                <span></span>
-            </div>
-            <div class="register-form__item">
-                <input id="editPriceInput" placeholder="Giá" type="number">
-                <span></span>
-            </div>
-            <div class="action-button button dark">
-                <button id="editCloseBtn" onclick="editProduct()" class="btn">Sửa sản phẩm</button>
+        <div class="overlay" id="overlay"></div>
+        <div class="modal" id="modal">
+            <button style="cursor: pointer;" class="modal-close-btn" id="close-btn"><i class="fa fa-times"
+                    title="閉じる"></i></button>
+            <div style="text-align: center;" class="modal-form">
+                <div style="padding: 4px; display: inline-block; margin-bottom: 24px; border: 1px solid #f5f6f9;"
+                    class="modal-product-img">
+                    <img style="width: 100px" id="editImg" src="" alt="">
+                </div>
+                <div class="register-form__item">
+                    <input id="editNameInput" placeholder="Tên sản phẩm" type="text">
+                    <span></span>
+                </div>
+                <div class="register-form__item">
+                    <input id="editPriceInput" placeholder="Giá" type="number">
+                    <span></span>
+                </div>
+                <div class="action-button button dark">
+                    <button id="editCloseBtn" onclick="editProduct()" class="btn">Sửa sản phẩm</button>
+                </div>
             </div>
         </div>
     </div>
+
     <!-- <div class="form-popup" id="myForm">
         <form action="/action_page.php" class="form-container">
             <h1>Login</h1>
@@ -235,7 +268,7 @@
     <script src="/upload/upload.js"></script>
     <script src="/script/Products.js"></script>
 
-    <script>
+    <!-- <script>
         function postProduct() {
             let nameProduct = document.getElementById('nameProduct').value;
             let priceProduct = document.getElementById('priceProduct').value;
@@ -365,7 +398,7 @@
             }, 2000);
         }
 
-    </script>
+    </script> -->
     <script src="/script/fixedBar.js"></script>
     <script src="/script/modal.js"></script>
 

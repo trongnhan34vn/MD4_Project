@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guitar Plus</title>
+    <link rel="stylesheet" th:href="@{/assets/fonts/themify-icons/css/themify-icons.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto:ital,wght@0,500;0,700;1,300&display=swap"
+            rel="stylesheet"/>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"/>
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-free-6.2.0-web/css/all.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/assets/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/outstanding_product.css}">
+    <script th:src="@{/assets/js/Products.js}"></script>
+    <script th:src="@{/assets/js/outstading_product.js}"></script>
+</head>
+<body>
+<div class="app">
+    <!-- Header -->
+    <div class="header">
+        <div id="header" class="header-navbar__contact">
+            <div id="navContact" class="header-navbar__contact-item">
+                <i class="fa-sharp fa-solid fa-house-chimney"></i>
+                <a href="">Hệ thống cửa hàng</a>
+            </div>
+            <div class="header-navbar__contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <a href="">Mua hàng online: 0969436769</a>
+            </div>
+        </div>
+        <div id="navbar" class="header-navbar-feat header-navbar-feat--index">
+            <div class="grid">
+                <div class="header-navbar-container">
+                    <div class="header-navbar-item">
+                        <div class="header-navbar__logo">
+                            <a href="index.html">
+                                <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"
+                                     alt="" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-navbar-feature-container">
+                        <div class="header-navbar-item">
+                            <ul class="header-navbar__lists-item">
+                                <li class="header-nav-products-wrap">
+                                    <a href="">Sản phẩm
+                                        <i class="fa-solid fa-angle-down"></i></a>
+                                    <ul class="header-nav-products-list">
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Guitar</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Amplifier</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Dây đàn</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Pedals &
+                                                        Effect</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Phụ kiện đàn</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Pickup & EQ</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Thiết bị âm thanh &
+                                                        phòng thu</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Trống & bộ gõ</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="">Sản phẩm mới</a></li>
+                                <li class="header-nav-products-wrap">
+                                    <a href="">Thương hiệu
+                                        <i class="fa-solid fa-angle-down"></i></a>
+                                    <ul class="header-nav-products-list">
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Guitar Plus</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Taylor</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Marshall</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Epiphone</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Martin Guitar</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Yamaha</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Cort</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Elixir</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Boss</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Fishman</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Orange</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Dunlop</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                        <li class="header-nav-products-item">
+                                            <a href=""><span>Presonus</span>
+                                                <i class="header-nav-icon ti-angle-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="">Blog</a></li>
+                                <li>
+                                    <a href="">Giới thiệu </a>
+                                </li>
+                                <li><a href="">Liên hệ</a></li>
+                            </ul>
+                        </div>
+                        <div class="header-navbar-item">
+                            <ul class="header-navbar__features">
+                                <li class="nav-search">
+                                    <span><i class="bi bi-search"></i></span>
+                                    <div class="nav-search-container">
+                                        <input placeholder="Tìm kiếm..." type="text" />
+                                        <button>
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li class="nav-account">
+                                        <span><i class="bi bi-person-circle"></i><span id="account">Tài
+                                                khoản</span></span>
+                                    <!-- Regis & Login -->
+                                    <div class="nav-account-container">
+                                        <a class="sign-up account-info" href="/guitar-plus/register">Đăng kí</a>
+                                        <a class="sign-in account-cart" href="login.html">Đăng nhập</a>
+                                        <a onclick="logOut()" class="logOut" href="#"></a>
+                                    </div>
+                                </li>
+                                <li class="mini-cart-contain">
+                                    <a id="cart-product" href="cart-products.html">
+                                            <span><i class="bi bi-bag-fill"></i>
+                                                Giỏ hàng</span><span id="count"></span></a>
+                                    <div class="mini-cart">
+                                        <h3>Thông tin giỏ hàng</h3>
+                                        <div id="showMiniCart" class="mini-cart-body">
+                                            <!--                                            Đây là giỏ hàng-->
+                                            <!--                                            <img src="https://bizweb.dktcdn.net/100/187/527/themes/504306/assets/empty_cart.png?1666747878392" alt="">-->
+                                        </div>
+                                        <div class="mini-cart-footer">
+                                            <p class="mini-cart__products-remain">
+                                                Còn
+                                                <span id="productsRemain"></span>
+                                                sản phẩm
+                                            </p>
+                                            <a id="mini-cart-product" href="cart-products.html">Xem giỏ hàng</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header -->
+    <!-- Path -->
+    <div class="path path-header">
+        <div class="grid">
+            <a style="
+                            display: inline-block;
+                            text-decoration: none;
+                            color: #000;
+                        " href="index.html">
+                <h1>Trang chủ</h1>
+            </a>
+        </div>
+    </div>
+    <!-- Path -->
+    <!-- Slider -->
+    <div class="slider">
+        <i class="fa-solid fa-angle-left slider-prev"></i>
+        <div class="slider-wraper">
+            <div class="slider-main">
+                <div class="slider-item">
+                    <img th:src="@{/assets/img/slider/item1.jpeg}" alt="" />
+                </div>
+                <div class="slider-item">
+                    <img th:src="@{/assets/img/slider/item2.jpeg}" alt="" />
+                </div>
+                <div class="slider-item">
+                    <img th:src="@{/assets/img/slider/item3.jpeg}" alt="" />
+                </div>
+                <div class="slider-item">
+                    <img th:src="@{/assets/img/slider/item4.jpeg}" alt="" />
+                </div>
+                <div class="slider-item">
+                    <img th:src="@{/assets/img/slider/item5.jpeg}" alt="" />
+                </div>
+                <div class="slider-item">
+                    <img th:src="@{/assets/img/slider/item6.jpeg}" alt="" />
+                </div>
+                <div class="slider-item">
+                    <img th:src="@{/assets/img/slider/item7.webp}" alt="" />
+                </div>
+            </div>
+        </div>
+        <i class="fa-solid fa-angle-right slider-next"></i>
+    </div>
+    <!-- Slider -->
+    <!-- Outstanding Products -->
+    <div class="products" id="outstanding-products">
+        <div class="grid">
+            <div class="best-sale-title">
+                <a href="#"> Sản phẩm nổi bật </a>
+            </div>
+            <div class="med-related-prod-wrap" id="med-related-prod-wrapper">
+                <div class="med-rel-prod-slider-wrapper">
+                    <div class="med-rel-prod-slider carousel-content">
+
+                        <div class="med-product-card">
+                            <div class="related-prod-wrapper">
+                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
+                                     alt="" class="related-prod-img">
+                            </div>
+                            <div class="related-prod-detail">
+                                <p class="rel-med-name">Subrex Z</p>
+                                <p class="rel-no-of-tab">30 tablets</p>
+                                <p class="rel-company-name">Abbott</p>
+                                <p class="rel-prod-price">Rs 250.00</p>
+                            </div>
+                        </div>
+
+                        <div class="med-product-card">
+                            <div class="related-prod-wrapper">
+                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
+                                     alt="" class="related-prod-img">
+                            </div>
+                            <div class="related-prod-detail">
+                                <p class="rel-med-name">Subrex Z</p>
+                                <p class="rel-no-of-tab">30 tablets</p>
+                                <p class="rel-company-name">Abbott</p>
+                                <p class="rel-prod-price">Rs 250.00</p>
+                            </div>
+                        </div>
+
+                        <div class="med-product-card">
+                            <div class="related-prod-wrapper">
+                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
+                                     alt="" class="related-prod-img">
+                            </div>
+                            <div class="related-prod-detail">
+                                <p class="rel-med-name">Subrex Z</p>
+                                <p class="rel-no-of-tab">30 tablets</p>
+                                <p class="rel-company-name">Abbott</p>
+                                <p class="rel-prod-price">Rs 250.00</p>
+                            </div>
+                        </div>
+
+                        <div class="med-product-card">
+                            <div class="related-prod-wrapper">
+                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
+                                     alt="" class="related-prod-img">
+                            </div>
+                            <div class="related-prod-detail">
+                                <p class="rel-med-name">Subrex Z</p>
+                                <p class="rel-no-of-tab">30 tablets</p>
+                                <p class="rel-company-name">Abbott</p>
+                                <p class="rel-prod-price">Rs 250.00</p>
+                            </div>
+                        </div>
+
+                        <div class="med-product-card">
+                            <div class="related-prod-wrapper">
+                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
+                                     alt="" class="related-prod-img">
+                            </div>
+                            <div class="related-prod-detail">
+                                <p class="rel-med-name">Subrex Z</p>
+                                <p class="rel-no-of-tab">30 tablets</p>
+                                <p class="rel-company-name">Abbott</p>
+                                <p class="rel-prod-price">Rs 250.00</p>
+                            </div>
+                        </div>
+
+                        <div class="med-product-card">
+                            <div class="related-prod-wrapper">
+                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
+                                     alt="" class="related-prod-img">
+                            </div>
+                            <div class="related-prod-detail">
+                                <p class="rel-med-name">Subrex Z</p>
+                                <p class="rel-no-of-tab">30 tablets</p>
+                                <p class="rel-company-name">Abbott</p>
+                                <p class="rel-prod-price">Rs 250.00</p>
+                            </div>
+                        </div>
+
+                        <div class="med-product-card">
+                            <div class="related-prod-wrapper">
+                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
+                                     alt="" class="related-prod-img">
+                            </div>
+                            <div class="related-prod-detail">
+                                <p class="rel-med-name">Subrex Z</p>
+                                <p class="rel-no-of-tab">30 tablets</p>
+                                <p class="rel-company-name">Abbott</p>
+                                <p class="rel-prod-price">Rs 250.00</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="med-slider-arrow-section">
+                        <button class="med-slider-prev med-slider-arrow btn-left" aria-label="left-arrow" onclick=""
+                                id="med-btn-left" type="button"></button>
+                        <button class="med-slider-next med-slider-arrow btn-right" aria-label="right-arrow"
+                                onclick="" id="med-btn-right" type="button"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Outstanding Products -->
+    <!-- Toast -->
+    <div id="toast"></div>
+    <!-- Extention -->
+    <div class="extention">
+        <div class="extention-img" style="
+                        background-image: url(https://theme.hstatic.net/200000388065/1000766714/14/background_banner.jpg?v=111);
+                    "></div>
+        <div class="extention-service">
+            <div class="grid">
+                <div class="grid__row">
+                    <div class="grid__column-12-4">
+                        <div class="extention-service-wrap">
+                            <img class="extention-service-icon"
+                                 src="https://theme.hstatic.net/200000388065/1000766714/14/vice_item_1.png?v=111"
+                                 alt="" />
+                            <h3 class="extention-content">
+                                Giao hàng miễn phí
+                            </h3>
+                            <p>với đơn hàng từ 500k trở lên</p>
+                        </div>
+                    </div>
+                    <div class="grid__column-12-4">
+                        <div class="extention-service-wrap">
+                            <img class="extention-service-icon"
+                                 src="https://theme.hstatic.net/200000388065/1000766714/14/vice_item_2.png?v=111"
+                                 alt="" />
+                            <h3 class="extention-content">
+                                Hỗ trợ online 24/7
+                            </h3>
+                            <p>Hỗ trợ online/offline 24/7</p>
+                        </div>
+                    </div>
+                    <div class="grid__column-12-4">
+                        <div class="extention-service-wrap">
+                            <img class="extention-service-icon"
+                                 src="https://theme.hstatic.net/200000388065/1000766714/14/vice_item_3.png?v=111"
+                                 alt="" />
+                            <h3 class="extention-content">
+                                Đặt hàng trực tuyến
+                            </h3>
+                            <p>Hotline : 0969436769</p>
+                        </div>
+                    </div>
+                    <div class="grid__column-12-4">
+                        <div class="extention-service-wrap">
+                            <img class="extention-service-icon"
+                                 src="https://theme.hstatic.net/200000388065/1000766714/14/vice_item_4.png?v=111"
+                                 alt="" />
+                            <h3 class="extention-content">
+                                Miễn phí đổi trả
+                            </h3>
+                            <p>Trong vòng 7 ngày</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Extention -->
+    <!-- Products -->
+    <div class="products">
+        <div class="grid">
+            <div class="best-sale-title">
+                <a href="#"> Sản phẩm bán chạy </a>
+            </div>
+            <div class="best-sale-products">
+                <div class="grid__row draw">
+                    <!--                    <div class="grid__column-12">-->
+                    <!--                        <div class="best-sale-products-item-wrap">-->
+                    <!--                            <div style="background-image: url(https://product.hstatic.net/200000388065/product/859cf541-b3c3-40bc-a43c-2ab90feb1e55_6f98e69436884d77a3cf97a4b0f9683f_large.jpg)"-->
+                    <!--                                 class="best-sale-products-img">-->
+
+                    <!--                            </div>-->
+                    <!--                            <div class="best-sale-products-desc">-->
+                    <!--                                <h3 class="best-sale-products__title name-products">Amp Marshal MG10G 10W</h3>-->
+                    <!--                                <h3 class="best-sale-products__price price">2.000.000 <span>đ</span></h3>-->
+                    <!--                            </div>-->
+                    <!--                            <a id="add-cart" class="best-sale-products__link cart-link add-cart" href="cart-products.html">-->
+                    <!--                                <div class="best-sale-products__extention">-->
+                    <!--                                    <span>Thêm vào giỏ hàng</span>-->
+                    <!--                                </div>-->
+                    <!--                            </a>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Products -->
+    <!-- Footer -->
+    <div class="footer">
+        <div class="grid">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" alt="" />
+                </div>
+                <ul class="footer-social">
+                    <li>
+                        <a href=""><i class="bi bi-youtube"></i></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="bi bi-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="bi bi-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="bi bi-twitter"></i></a>
+                    </li>
+                </ul>
+                <div class="footer-copyright">
+                    <h3>© 2021 GUITARPLUS • ALL RIGHTS RESERVED</h3>
+                </div>
+                <ul class="footer-link">
+                    <li><a href="">Trang chủ</a></li>
+                    <li><a href="product-manage/product.html">Sản phẩm</a></li>
+                    <li><a href="">Thương hiệu</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="">Giới thiệu</a></li>
+                    <li><a href="">Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/assets/js/slider.js}"></script>
+<script th:src="@{/assets/js/fixedBar.js}"></script>
+<script th:src="@{/assets/js/home.js}"></script>
+</body>
+</html>

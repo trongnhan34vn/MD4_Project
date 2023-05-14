@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import rikkei.academy.guitarplusclonejava.model.Image;
 import rikkei.academy.guitarplusclonejava.model.Product;
-import rikkei.academy.guitarplusclonejava.service.CatalogService.CatalogServiceIMPL;
-import rikkei.academy.guitarplusclonejava.service.CatalogService.ICatalogService;
-import rikkei.academy.guitarplusclonejava.service.IImageService.IImageService;
-import rikkei.academy.guitarplusclonejava.service.IImageService.ImageServiceIMPL;
-import rikkei.academy.guitarplusclonejava.service.ProductService.IProductService;
-import rikkei.academy.guitarplusclonejava.service.ProductService.ProductServiceIMPL;
+import rikkei.academy.guitarplusclonejava.service.IMPL.CatalogServiceIMPL;
+import rikkei.academy.guitarplusclonejava.service.ICatalogService;
+import rikkei.academy.guitarplusclonejava.service.IImageService;
+import rikkei.academy.guitarplusclonejava.service.IMPL.ImageServiceIMPL;
+import rikkei.academy.guitarplusclonejava.service.IProductService;
+import rikkei.academy.guitarplusclonejava.service.IMPL.ProductServiceIMPL;
 
 import java.io.File;
+import java.util.List;
 
 @Controller
 @RequestMapping(value ="/product")
@@ -40,7 +41,7 @@ public class ProductController {
     public String showCreateForm(Model model) {
         model.addAttribute("catalogList", catalogService.findAll());
         model.addAttribute("product", new Product());
-        return "/admin-views/ProductManagement/create-product-form";
+        return "/admin-views/ProductManagement/create";
     }
 
     @PostMapping("/save")
@@ -55,6 +56,8 @@ public class ProductController {
             for (MultipartFile file : files) {
                 Image newImage = new Image();
                 String fileName = file.getOriginalFilename();
+                fileName = checkExist(fileName, imageService.findAll());
+                System.out.println(fileName);
                 FileCopyUtils.copy(file.getBytes(), new File(fileUpload + fileName));
                 newImage.setUrl(fileName);
                 newImage.setProductId(productService.getLastProductId());
@@ -66,16 +69,59 @@ public class ProductController {
         return "redirect:/product/create";
     }
 
-    @GetMapping("/{id}/delete")
-    public String delete(@PathVariable int id) {
+    @GetMapping("/delete")
+    public String delete(@RequestParam ("idDel") int id) {
+        for (Image image : productService.findById(id).getListImgs()) {
+            File file = new File(fileUpload + image.getUrl());
+            if (file.delete()) {
+                System.out.println("xoá được r");
+            } else {
+                System.out.println("đ xoá được");
+            }
+        }
         productService.remove(id);
         return "redirect:/product/show";
     }
 
-    @GetMapping("/{id}/update")
-    public String showUpdateForm(@PathVariable int id, Model model) {
+    @GetMapping("/update")
+    public String showUpdateForm(@RequestParam ("idU") int id, Model model) {
         model.addAttribute("product", productService.findById(id));
         model.addAttribute("catalogList", catalogService.findAll());
         return "/admin-views/ProductManagement/update";
+    }
+
+    @PostMapping("/update")
+    public String updateProduct(
+            @RequestParam ("files")MultipartFile[] files,
+            @ModelAttribute ("product") Product uProduct,
+            @RequestParam ("catalogId") String catalogId
+    ) {
+        uProduct.setCatalog(catalogService.findById(Integer.parseInt(catalogId)));
+        productService.save(uProduct);
+        try {
+            for (MultipartFile file : files) {
+                Image newImage = new Image();
+                String fileName = file.getOriginalFilename();
+                FileCopyUtils.copy(file.getBytes(), new File(fileUpload + fileName));
+                newImage.setUrl(fileName);
+                newImage.setProductId(uProduct.getProductId());
+                imageService.save(newImage);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/product/update?idU=" + uProduct.getProductId();
+    }
+
+    private String checkExist(String fileName, List<Image> listImgs) {
+        for (Image image: listImgs) {
+            if (image.getUrl().equals(fileName)) {
+                String name = fileName.split("\\.")[0];
+                String type = fileName.split("\\.")[1];
+                fileName = name + "_" + image.getId() + "."+ type;
+                return fileName;
+            }
+        }
+        return fileName;
     }
 }

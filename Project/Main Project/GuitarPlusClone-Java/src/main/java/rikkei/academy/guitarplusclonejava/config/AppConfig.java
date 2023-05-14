@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -17,9 +18,6 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import rikkei.academy.guitarplusclonejava.service.CatalogService.CatalogServiceIMPL;
-import rikkei.academy.guitarplusclonejava.service.IImageService.ImageServiceIMPL;
-import rikkei.academy.guitarplusclonejava.service.ProductService.ProductServiceIMPL;
 
 import java.io.IOException;
 
@@ -27,6 +25,7 @@ import java.io.IOException;
 @EnableWebMvc
 @ComponentScan("rikkei.academy.guitarplusclonejava.controller")
 @PropertySource("classpath:upload-file.properties")
+@Component
 public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     @Value("${file-upload}")
     private String fileUpload;
@@ -83,13 +82,26 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
                 .addResourceLocations("file:" + fileUpload)
                 .setCachePeriod(999999999);
 
+        registry.addResourceHandler("classpath:/js/**")
+                .addResourceLocations("/assets/js/")
+                .setCachePeriod(999999999);
+
+        registry.addResourceHandler("classpath:/fonts/**")
+                .addResourceLocations("/assets/fonts/")
+                .setCachePeriod(999999999);
+
         registry.addResourceHandler("classpath:/css/**")
                 .addResourceLocations("/assets/css/")
                 .setCachePeriod(999999999);
 
-        registry.addResourceHandler("classpath:vendor/**")
-                .addResourceLocations("/assets/vendor/")
-                .setCachePeriod(999999999);
+        if (!registry.hasMappingForPattern("/webjars/**")) {
+            registry.addResourceHandler("/webjars/**").addResourceLocations(
+                    "classpath:/META-INF/resources/webjars/");
+        }
+        if (!registry.hasMappingForPattern("/**")) {
+            registry.addResourceHandler("/**").addResourceLocations(
+                    CLASSPATH_RESOURCE_LOCATIONS);
+        }
 
 //        registry.addResourceHandler("/js/**")
 //                .addResourceLocations("/assets/lib/")
@@ -99,25 +111,15 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     }
 
+    private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
+            "classpath:/META-INF/resources/", "classpath:/resources/",
+            "classpath:/static/", "classpath:/public/"
+    };
+
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver getResolver() throws IOException {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setMaxUploadSizePerFile(52428800);
         return resolver;
     }
-
-//    @Bean
-//    public CatalogServiceIMPL catalogServiceIMPL() {
-//        return new CatalogServiceIMPL();
-//    }
-//
-//    @Bean
-//    public ProductServiceIMPL productServiceIMPL() {
-//        return new ProductServiceIMPL();
-//    }
-//
-//    @Bean
-//    public ImageServiceIMPL imageServiceIMPL() {
-//        return new ImageServiceIMPL();
-//    }
 }
