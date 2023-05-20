@@ -17,10 +17,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/assets/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/base1.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/outstanding_product.css}">
-    <script th:src="@{/assets/js/Products.js}"></script>
     <script th:src="@{/assets/js/outstading_product.js}"></script>
 </head>
 <body>
@@ -42,7 +41,7 @@
                 <div class="header-navbar-container">
                     <div class="header-navbar-item">
                         <div class="header-navbar__logo">
-                            <a href="index.html">
+                            <a href="/">
                                 <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"
                                      alt="" />
                             </a>
@@ -169,19 +168,33 @@
                                     </div>
                                 </li>
                                 <li class="nav-account">
-                                        <span><i class="bi bi-person-circle"></i><span id="account">Tài
-                                                khoản</span></span>
+                                    <th:block th:if="${session.userLogin}">
+                                        <span><i class="bi bi-person-circle"></i><span th:text="${session.userLogin.getFirstName()} + ' ' +${session.userLogin.getLastName()}">
+                                                </span></span>
+                                    </th:block>
+                                    <th:block th:if="${session.userLogin == null}">
+                                        <span><i class="bi bi-person-circle"></i><span>Tài khoản
+                                                </span></span>
+                                    </th:block>
                                     <!-- Regis & Login -->
-                                    <div class="nav-account-container">
-                                        <a class="sign-up account-info" href="/guitar-plus/register">Đăng kí</a>
-                                        <a class="sign-in account-cart" href="login.html">Đăng nhập</a>
-                                        <a onclick="logOut()" class="logOut" href="#"></a>
-                                    </div>
+                                    <th:block th:if="${session.userLogin == null}">
+                                        <div class="nav-account-container">
+                                            <a class="sign-up account-info" href="/guitar-plus/register">Đăng kí</a>
+                                            <a class="sign-in account-cart" href="/guitar-plus/login">Đăng nhập</a>
+                                        </div>
+                                    </th:block>
+                                    <th:block th:if="${session.userLogin}">
+                                        <div class="nav-account-container">
+                                            <a class="sign-up account-info" href="">Thông tin tài khoản</a>
+                                            <a class="sign-in account-cart" href="">Giỏ hàng</a>
+                                            <a style="color: red" class="logOut" href="/user/logOut">Log Out</a>
+                                        </div>
+                                    </th:block>
                                 </li>
                                 <li class="mini-cart-contain">
-                                    <a id="cart-product" href="cart-products.html">
+                                    <a id="cart-product" href="/cart">
                                             <span><i class="bi bi-bag-fill"></i>
-                                                Giỏ hàng</span><span id="count"></span></a>
+                                                Giỏ hàng</span><span id="count">0</span></a>
                                     <div class="mini-cart">
                                         <h3>Thông tin giỏ hàng</h3>
                                         <div id="showMiniCart" class="mini-cart-body">
@@ -191,7 +204,7 @@
                                         <div class="mini-cart-footer">
                                             <p class="mini-cart__products-remain">
                                                 Còn
-                                                <span id="productsRemain"></span>
+                                                <span id="productsRemain">0</span>
                                                 sản phẩm
                                             </p>
                                             <a id="mini-cart-product" href="cart-products.html">Xem giỏ hàng</a>
@@ -259,98 +272,18 @@
             <div class="med-related-prod-wrap" id="med-related-prod-wrapper">
                 <div class="med-rel-prod-slider-wrapper">
                     <div class="med-rel-prod-slider carousel-content">
-
-                        <div class="med-product-card">
-                            <div class="related-prod-wrapper">
-                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
-                                     alt="" class="related-prod-img">
-                            </div>
-                            <div class="related-prod-detail">
-                                <p class="rel-med-name">Subrex Z</p>
-                                <p class="rel-no-of-tab">30 tablets</p>
-                                <p class="rel-company-name">Abbott</p>
-                                <p class="rel-prod-price">Rs 250.00</p>
-                            </div>
-                        </div>
-
-                        <div class="med-product-card">
-                            <div class="related-prod-wrapper">
-                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
-                                     alt="" class="related-prod-img">
-                            </div>
-                            <div class="related-prod-detail">
-                                <p class="rel-med-name">Subrex Z</p>
-                                <p class="rel-no-of-tab">30 tablets</p>
-                                <p class="rel-company-name">Abbott</p>
-                                <p class="rel-prod-price">Rs 250.00</p>
-                            </div>
-                        </div>
-
-                        <div class="med-product-card">
-                            <div class="related-prod-wrapper">
-                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
-                                     alt="" class="related-prod-img">
-                            </div>
-                            <div class="related-prod-detail">
-                                <p class="rel-med-name">Subrex Z</p>
-                                <p class="rel-no-of-tab">30 tablets</p>
-                                <p class="rel-company-name">Abbott</p>
-                                <p class="rel-prod-price">Rs 250.00</p>
-                            </div>
-                        </div>
-
-                        <div class="med-product-card">
-                            <div class="related-prod-wrapper">
-                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
-                                     alt="" class="related-prod-img">
-                            </div>
-                            <div class="related-prod-detail">
-                                <p class="rel-med-name">Subrex Z</p>
-                                <p class="rel-no-of-tab">30 tablets</p>
-                                <p class="rel-company-name">Abbott</p>
-                                <p class="rel-prod-price">Rs 250.00</p>
-                            </div>
-                        </div>
-
-                        <div class="med-product-card">
-                            <div class="related-prod-wrapper">
-                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
-                                     alt="" class="related-prod-img">
-                            </div>
-                            <div class="related-prod-detail">
-                                <p class="rel-med-name">Subrex Z</p>
-                                <p class="rel-no-of-tab">30 tablets</p>
-                                <p class="rel-company-name">Abbott</p>
-                                <p class="rel-prod-price">Rs 250.00</p>
-                            </div>
-                        </div>
-
-                        <div class="med-product-card">
-                            <div class="related-prod-wrapper">
-                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
-                                     alt="" class="related-prod-img">
-                            </div>
-                            <div class="related-prod-detail">
-                                <p class="rel-med-name">Subrex Z</p>
-                                <p class="rel-no-of-tab">30 tablets</p>
-                                <p class="rel-company-name">Abbott</p>
-                                <p class="rel-prod-price">Rs 250.00</p>
-                            </div>
-                        </div>
-
-                        <div class="med-product-card">
-                            <div class="related-prod-wrapper">
-                                <img src="https://www.practostatic.com/practopedia-images/v3/res-750/confido-tablet-60-s_e54d0810-345d-44bf-9487-454840599ea1.JPG"
-                                     alt="" class="related-prod-img">
-                            </div>
-                            <div class="related-prod-detail">
-                                <p class="rel-med-name">Subrex Z</p>
-                                <p class="rel-no-of-tab">30 tablets</p>
-                                <p class="rel-company-name">Abbott</p>
-                                <p class="rel-prod-price">Rs 250.00</p>
-                            </div>
-                        </div>
-
+                        <th:block th:each="otdProduct : ${outStandingProducts}">
+                            <a style="text-decoration: none" th:href="@{/product/product-detail(id=${otdProduct.getProductId()})}" class="med-product-card">
+                                <div class="related-prod-wrapper" style="margin-bottom: 20px; height: 200px;">
+                                    <img th:src="@{'/images/' + ${otdProduct.getListImgs().get(0).getUrl()}}"
+                                         alt="" class="related-prod-img">
+                                </div>
+                                <div class="related-prod-detail">
+                                    <p style="font-size: 16px; padding-top: 10px" class="rel-med-name text-edit" th:text="${otdProduct.getProductName()}">Subrex Z</p>
+                                    <p style="color: red; text-align: right" class="rel-prod-price" th:text="${config.format(otdProduct.getPrice())}">Rs 250.00</p>
+                                </div>
+                            </a>
+                        </th:block>
                     </div>
                     <div class="med-slider-arrow-section">
                         <button class="med-slider-prev med-slider-arrow btn-left" aria-label="left-arrow" onclick=""
@@ -363,8 +296,6 @@
         </div>
     </div>
     <!-- Outstanding Products -->
-    <!-- Toast -->
-    <div id="toast"></div>
     <!-- Extention -->
     <div class="extention">
         <div class="extention-img" style="
@@ -430,23 +361,24 @@
             </div>
             <div class="best-sale-products">
                 <div class="grid__row draw">
-                    <!--                    <div class="grid__column-12">-->
-                    <!--                        <div class="best-sale-products-item-wrap">-->
-                    <!--                            <div style="background-image: url(https://product.hstatic.net/200000388065/product/859cf541-b3c3-40bc-a43c-2ab90feb1e55_6f98e69436884d77a3cf97a4b0f9683f_large.jpg)"-->
-                    <!--                                 class="best-sale-products-img">-->
+                    <div class="grid__column-12" th:each="product : ${hotProducts}">
+                        <div class="best-sale-products-item-wrap" >
+                            <div th:style="'background-image: url(/images/'+${product.getListImgs().get(0).getUrl()}+');'"
+                                 class="best-sale-products-img">
 
-                    <!--                            </div>-->
-                    <!--                            <div class="best-sale-products-desc">-->
-                    <!--                                <h3 class="best-sale-products__title name-products">Amp Marshal MG10G 10W</h3>-->
-                    <!--                                <h3 class="best-sale-products__price price">2.000.000 <span>đ</span></h3>-->
-                    <!--                            </div>-->
-                    <!--                            <a id="add-cart" class="best-sale-products__link cart-link add-cart" href="cart-products.html">-->
-                    <!--                                <div class="best-sale-products__extention">-->
-                    <!--                                    <span>Thêm vào giỏ hàng</span>-->
-                    <!--                                </div>-->
-                    <!--                            </a>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
+                            </div>
+                            <div class="best-sale-products-desc">
+                                <h3 th:text="${product.getProductName()}" class="best-sale-products__title name-products">Amp Marshal MG10G 10W</h3>
+                                <h3 th:text="${config.format(product.getPrice())}" class="best-sale-products__price price">2.000.000 <span>đ</span></h3>
+                            </div>
+                            <a id="add-cart" class="best-sale-products__link cart-link add-cart"
+                               th:href="@{/product/product-detail(id=${product.getProductId()})}">
+                                <div class="best-sale-products__extention">
+                                    <span>Xem chi tiết</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -487,9 +419,21 @@
             </div>
         </div>
     </div>
+    <th:block th:if="${message.length() != 0}">
+        <div class="overlay" id="overlay"></div>
+        <div class="modal" id="modal">
+            <button style="cursor: pointer;" class="modal-close-btn" id="close-btn"><i class="fa fa-times" title="閉じる"></i></button>
+            <h1 style="text-align: center; line-height: 24px" th:text="${message}"></h1>
+            <p style="text-align: center; color: green;"><i style="font-size: 40px" class="bi bi-check-circle"></i></p>
+            <div style="display: flex; justify-content: right">
+                <button class="btn" id="okBtn">OK</button>
+            </div>
+        </div>
+    </th:block>
 </div>
 <script th:src="@{/assets/js/slider.js}"></script>
 <script th:src="@{/assets/js/fixedBar.js}"></script>
-<script th:src="@{/assets/js/home.js}"></script>
+<!--<script th:src="@{/assets/js/home.js}"></script>-->
+<script th:src="@{/assets/js/modal.js}"></script>
 </body>
 </html>

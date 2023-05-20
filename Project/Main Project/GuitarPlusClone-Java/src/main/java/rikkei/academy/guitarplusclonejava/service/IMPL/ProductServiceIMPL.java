@@ -22,6 +22,8 @@ public class ProductServiceIMPL implements IProductService {
     private static final String QUERY_CREATE_PRODUCT = "{CALL createProduct(?,?,?,?,?)}";
     private static final String QUERY_DELETE_PRODUCT = "{CALL deleteProductById(?)}";
     private static final String QUERY_UPDATE_PRODUCT = "{CALL updateProduct(?,?,?,?,?,?,?)}";
+    private static final String QUERY_GET_HOT_PRODUCTS = "{CALL getHotProducts()}";
+    private static final String QUERY_GET_OUTSTANDING_PRODUCTS = "{CALL getOutStandingProducts()}";
     @Override
     public List<Product> findAll() {
         Connection conn = null;
@@ -163,5 +165,63 @@ public class ProductServiceIMPL implements IProductService {
             ConnectionDB.closeConnection(conn);
         }
         return id;
+    }
+
+    @Override
+    public List<Product> getHotProducts() {
+        Connection conn = null;
+        List<Product> list = new ArrayList<>();
+        try {
+            conn = ConnectionDB.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(QUERY_GET_HOT_PRODUCTS);
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getInt("ProductID"));
+                product.setProductName(resultSet.getString("ProductName"));
+                product.setDescription(resultSet.getString("Description"));
+                int catalogId = resultSet.getInt("CatalogID");
+                product.setCatalog(catalogService.findById(catalogId));
+                product.setQuantity(resultSet.getInt("Quantity"));
+                product.setPrice(resultSet.getFloat("Price"));
+                product.setStatus(resultSet.getBoolean("ProductStatus"));
+                product.setListImgs(imageService.findImagesByProductId(product.getProductId()));
+                list.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDB.closeConnection(conn);
+        }
+        return list;
+    }
+
+    @Override
+    public List<Product> getOutStandingProducts() {
+        Connection conn = null;
+        List<Product> list = new ArrayList<>();
+        try {
+            conn = ConnectionDB.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(QUERY_GET_OUTSTANDING_PRODUCTS);
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getInt("ProductID"));
+                product.setProductName(resultSet.getString("ProductName"));
+                product.setDescription(resultSet.getString("Description"));
+                int catalogId = resultSet.getInt("CatalogID");
+                product.setCatalog(catalogService.findById(catalogId));
+                product.setQuantity(resultSet.getInt("Quantity"));
+                product.setPrice(resultSet.getFloat("Price"));
+                product.setStatus(resultSet.getBoolean("ProductStatus"));
+                product.setListImgs(imageService.findImagesByProductId(product.getProductId()));
+                list.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDB.closeConnection(conn);
+        }
+        return list;
     }
 }

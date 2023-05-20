@@ -5,6 +5,9 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin-views/ProductManagement/pikachu.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin-views/ProductManagement" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin-views/ProductManagement/update.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin-views/ProductManagement" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin-views/index.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin-views" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user-views/cart.html" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user-views" />
       </map>
     </option>
   </component>

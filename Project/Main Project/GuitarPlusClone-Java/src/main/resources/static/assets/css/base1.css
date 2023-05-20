@@ -87,6 +87,21 @@ html {
     width: 100%;
 }
 
+.btn__buy {
+    border-radius: 500px;
+    border: 1px solid #ff0005;
+    overflow: hidden;
+    background-color: #ff0005;
+}
+
+.text-edit {
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
 /* Animation */
 
 @keyframes slideUp {

@@ -7,8 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import rikkei.academy.guitarplusclonejava.config.Config;
+import rikkei.academy.guitarplusclonejava.model.Cart;
 import rikkei.academy.guitarplusclonejava.model.Image;
 import rikkei.academy.guitarplusclonejava.model.Product;
+import rikkei.academy.guitarplusclonejava.model.User;
 import rikkei.academy.guitarplusclonejava.service.IMPL.CatalogServiceIMPL;
 import rikkei.academy.guitarplusclonejava.service.ICatalogService;
 import rikkei.academy.guitarplusclonejava.service.IImageService;
@@ -16,6 +19,7 @@ import rikkei.academy.guitarplusclonejava.service.IMPL.ImageServiceIMPL;
 import rikkei.academy.guitarplusclonejava.service.IProductService;
 import rikkei.academy.guitarplusclonejava.service.IMPL.ProductServiceIMPL;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.List;
 
@@ -34,6 +38,7 @@ public class ProductController {
     @GetMapping("/show")
     public String show(Model model) {
         model.addAttribute("products", productService.findAll());
+        model.addAttribute("config", new Config());
         return "/admin-views/ProductManagement/show1";
     }
 
@@ -111,6 +116,15 @@ public class ProductController {
             e.printStackTrace();
         }
         return "redirect:/product/update?idU=" + uProduct.getProductId();
+    }
+
+    @GetMapping("/product-detail")
+    public String productDetail(@RequestParam ("id") int id, Model model) {
+        model.addAttribute("product", productService.findById(id));
+        model.addAttribute("config", Config.currencyVN);
+        Cart cart = new Cart();
+        model.addAttribute("cart", cart);
+        return "/user-views/product-detail";
     }
 
     private String checkExist(String fileName, List<Image> listImgs) {

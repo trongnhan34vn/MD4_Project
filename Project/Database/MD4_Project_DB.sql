@@ -39,17 +39,55 @@ CREATE TABLE User
     Gender    BIT DEFAULT (1),
     BirthDate DATE,
     Password  VARCHAR(255) NOT NULL,
-    Role      INT          NOT NULL
+    Role      INT          NOT NULL,
+    Status    BIT DEFAULT (1)
 );
 
+CREATE TABLE Cart
+(
+    CartID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES User(UserID),
+    ProductID INT,
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
+    Quantity INT
+);
+alter table Cart
+add column Status bit default 0;
+CREATE TABLE `Order`
+(
+    OrderId INT PRIMARY KEY AUTO_INCREMENT,
+    UserId INT,
+    FOREIGN KEY (UserId) REFERENCES User(UserID),
+    Phone VARCHAR(10),
+    Address TEXT,
+    OrderDate DATETIME DEFAULT NOW(),
+    OrderStatus BIT DEFAULT 0
+);
+
+CREATE TABLE OrderDetail
+(
+    ODId INT PRIMARY KEY AUTO_INCREMENT,
+    OrderId INT,
+    FOREIGN KEY (OrderId) REFERENCES `Order`(OrderId),
+    ProductId INT,
+    Quantity INT
+);
+
+# Insert
+
 INSERT INTO User
-VALUES (0, '', 'admin', '', 'admin@gmail.com', 1, '1998-01-01', 'pikachu123', 0);
+VALUES (0, '', 'admin', '', 'admin@gmail.com', 1, '1998-01-01', 'pikachu123', 0, 1);
 
 INSERT INTO Catalog (CatalogName)
 VALUES ('Guitar'),
        ('String'),
        ('Audio Interface & Recording'),
        ('Pickup & EQ');
+
+# Insert
+
+# Delimiter
 
 DELIMITER //
 CREATE PROCEDURE createImage(nURL TEXT, nPId INT)
@@ -59,7 +97,7 @@ end //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE createProduct(nPName VARCHAR(255), nCatID INT, nDesc VARCHAR(255), nQuantity INT, nPrice FLOAT)
+CREATE PROCEDURE createProduct(nPName VARCHAR(255), nCatID INT, nDesc TEXT, nQuantity INT, nPrice FLOAT)
 BEGIN
     INSERT INTO Product (ProductName, CatalogID, Description, Quantity, Price)
     VALUES (nPName, nCatID, nDesc, nQuantity, nPrice);
@@ -170,4 +208,110 @@ BEGIN
 end //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE checkLogin(cEmail VARCHAR(255), cPassword VARCHAR(255))
+BEGIN
+    SELECT * FROM User WHERE Email like cEmail AND Password like cPassword;
+end //
+DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE getHotProducts()
+BEGIN
+    SELECT * FROM Product LIMIT 12;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE getOutStandingProducts()
+BEGIN
+    SELECT * FROM Product ORDER BY RAND() LIMIT 7;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE findCartByUserId(fId INT)
+BEGIN
+    SELECT * FROM Cart WHERE UserID = fId;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE findProdOnCartUser (fUId INT,  fPId INT)
+BEGIN
+    SELECT * FROM (SELECT * FROM Cart WHERE UserID = fUId) AS UserCart WHERE ProductID = fPId;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE createCart(nUID INT, nPID INT, nQuantity INT)
+BEGIN
+    INSERT INTO Cart (UserID, ProductID, Quantity) VALUES (nUID, nPID, nQuantity);
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE findCartById(fId INT)
+BEGIN
+    SELECT * FROM Cart WHERE CartID = fId;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE updateCart(uCID INT, uQty INT)
+BEGIN
+    UPDATE Cart
+        SET Quantity = uQty WHERE CartID = uCID;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE removeCartById (idDel INT)
+BEGIN
+    DELETE FROM Cart WHERE CartID = idDel;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE updateStatusCart(idU INT, booU BIT)
+BEGIN
+    UPDATE Cart
+        SET Status = booU where CartID = idU ;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE findSelectedCartInUserCart(uId INT)
+BEGIN
+    SELECT * FROM Cart WHERE UserID = uId AND Cart.Status = TRUE;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE createOrder(cUserID INT, cPhone VARCHAR(10), cAddress TEXT, OUT lastId INT)
+BEGIN
+    INSERT INTO `Order` (UserId, Phone, Address) VALUES (cUserID, cPhone, cAddress);
+    SET lastId = LAST_INSERT_ID() ;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE findOrderById(fId INT)
+BEGIN
+    SELECT * FROM `Order` WHERE OrderId = fId;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE createOrderDetail(cOID INT, cPID INT, cQuantity INT)
+BEGIN
+    INSERT INTO OrderDetail (OrderId, ProductId, Quantity) VALUES (cOID,cPID,cQuantity);
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE findOrderDetailByOrderId(fOID INT)
+BEGIN
+    SELECT * FROM OrderDetail WHERE OrderId = fOID;
+end //
+DELIMITER ;

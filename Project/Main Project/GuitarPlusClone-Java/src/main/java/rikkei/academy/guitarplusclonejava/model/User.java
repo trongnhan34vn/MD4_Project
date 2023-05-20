@@ -10,11 +10,12 @@ public class User {
     private String email;
     private String password;
     private int role;
+    private boolean status;
 
     public User() {
     }
 
-    public User(int userId, String firstName, String lastName, String avatar, boolean gender, String birthDate, String email, String password, int role) {
+    public User(int userId, String firstName, String lastName, String avatar, boolean gender, String birthDate, String email, String password, int role, boolean status) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,6 +25,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
+        this.status = status;
     }
 
     public int getUserId() {
@@ -96,5 +98,29 @@ public class User {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", gender=" + gender +
+                ", birthDate='" + birthDate + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", status=" + status +
+                '}';
     }
 }

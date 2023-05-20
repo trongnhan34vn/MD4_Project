@@ -53,22 +53,8 @@ function validate() {
             checkValidate = false;
             return;
         } else {
-            let checkEmailExisted = false;
-            for (let i = 0; i < listUser.length; i++) {
-                if (email === listUser[i].email) {
-                    checkEmailExisted = true;
-                    break;
-                }
-            }
-            if (checkEmailExisted) {
-                document.getElementById('validateEmail').innerHTML = 'Email is existed';
-                checkValidate = false;
-                return
-            } else {
-                console.log('true')
-                document.getElementById('validateEmail').innerHTML = "";
-                checkValidate = true;
-            }
+            document.getElementById('validateEmail').innerHTML = "";
+            checkValidate = true;
         }
     }
 
@@ -98,9 +84,9 @@ function validate() {
     }
 }
 
-let cartList = JSON.parse(localStorage.getItem('cartList'));
-
-console.log(cartList);
+// let cartList = JSON.parse(localStorage.getItem('cartList'));
+//
+// console.log(cartList);
 // Tạo hàm đăng kí
 // function register() {
 //     console.log(checkValidate);

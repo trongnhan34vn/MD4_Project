@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Đăng kí</title>
     <link rel="stylesheet" th:href="@{/assets/fonts/themify-icons/css/themify-icons.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" th:href="@{/assets/css/main.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/base.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/base1.css}">
 </head>
 <body>
 <div class="app">
@@ -34,7 +34,7 @@
                 <div class="header-navbar-container">
                     <div class="header-navbar-item">
                         <div class="header-navbar__logo">
-                            <a href="index.html">
+                            <a href="/">
                                 <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"
                                      alt="">
                             </a>
@@ -103,8 +103,8 @@
                                 <li class="nav-account"><span><i class="bi bi-person-circle"></i> Tài khoản</span>
                                     <!-- Regis & Login -->
                                     <div class="nav-account-container">
-                                        <a href="register.html">Đăng kí</a>
-                                        <a href="login.html">Đăng nhập</a>
+                                        <a href="#">Đăng kí</a>
+                                        <a href="/login">Đăng nhập</a>
                                     </div>
                                 </li>
                                 <li class="mini-cart-contain"><span><i class="bi bi-bag-fill"></i> Giỏ hàng</span></li>
@@ -148,11 +148,11 @@
                 <span id="validateBirth"></span>
             </div>
             <div class="register-form__item">
-                <input th:field="*{email}" name="email" oninput="validate()" id="email" placeholder="Email" type="email">
+                <input th:field="*{email}" required name="email" oninput="validate()" id="email" placeholder="Email" type="email">
                 <span id="validateEmail"></span>
             </div>
             <div class="register-form__item">
-                <input th:field="*{password}" name="password" oninput="validate()" id="password" placeholder="Mật khẩu" type="password">
+                <input th:field="*{password}" required name="password" oninput="validate()" id="password" placeholder="Mật khẩu" type="password">
                 <span id="validatePassword"></span>
             </div>
             <div class="register-form__item">
@@ -196,8 +196,43 @@
             </div>
         </div>
     </div>
+    <th:block th:if="${message != null}">
+        <div class="overlay" id="overlay"></div>
+        <div class="modal" id="modal">
+            <button style="cursor: pointer;" class="modal-close-btn" id="close-btn"><i class="fa fa-times" title="閉じる"></i></button>
+            <h1 style="text-align: center; line-height: 24px" th:text="${message}"></h1>
+            <p style="text-align: center; color: red;"><i style="font-size: 40px" class="bi bi-x-circle"></i></p>
+            <div style="display: flex; justify-content: right">
+                <button class="btn" id="okBtn">OK</button>
+            </div>
+        </div>
+    </th:block>
 </div>
 <script th:src="@{/assets/js/register.js}"></script>
 <script th:src="@{/assets/js/User.js}"></script>
+<script th:src="@{/assets/js/modal.js}"></script>
+<script>
+    var emailInput = document.getElementById("email");
+    var errorDisplay = false;
+    var xhttp = new XMLHttpRequest();
+    emailInput.addEventListener("change", function () {
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                if (data.status === 'error') { // Email đã được sử dụng
+                    // hiển thị thông báo Email đã tồn tại
+                    errorDisplay = true;
+                    document.getElementById("validateEmail").innerHTML = "Email đã tồn tại!"
+                } else {
+                    // Email chưa được sử dụng
+                    // Tiếp tục thực hiện các bước đăng ký khác.
+                    errorDisplay = false;
+                }
+            }
+        };
+        xhttp.open("GET", "/user/check-email?email=" + emailInput.value, true);
+        xhttp.send();
+    });
+</script>
 </body>
 </html>
