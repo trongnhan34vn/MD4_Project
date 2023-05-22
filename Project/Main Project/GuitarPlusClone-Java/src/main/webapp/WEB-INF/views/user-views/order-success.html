@@ -69,30 +69,30 @@
                             class="header-navbar-item header-navbar-cart__user">
                         <ul class="header-navbar__features">
                             <li class="nav-account">
-                                <span
-                                ><i class="bi bi-person-circle"></i
-                                ><span id="account"
-                                >Tài khoản</span
-                                ></span
-                                >
+                                <th:block th:if="${session.userLogin}">
+                                        <span><i class="bi bi-person-circle"></i><span
+                                                th:text="${session.userLogin.getFirstName()} + ' ' +${session.userLogin.getLastName()}">
+                                                </span></span>
+                                </th:block>
+                                <th:block th:if="${session.userLogin == null}">
+                                        <span><i class="bi bi-person-circle"></i><span>Tài khoản
+                                                </span></span>
+                                </th:block>
                                 <!-- Regis & Login -->
-                                <div
-                                        class="nav-account-container nav-account-container--cart-products">
-                                    <a
-                                            class="sign-up account-info"
-                                            href="#"
-                                    >Đăng kí</a
-                                    >
-                                    <a
-                                            class="sign-in account-cart"
-                                            href="#"
-                                    >Đăng nhập</a
-                                    >
-                                    <a
-                                            onclick="logOut()"
-                                            class="logOut"
-                                            href="login.html"></a>
-                                </div>
+                                <th:block th:if="${session.userLogin == null}">
+                                    <div class="nav-account-container">
+                                        <a class="sign-up account-info" href="/guitar-plus/register">Đăng kí</a>
+                                        <a class="sign-in account-cart" href="/guitar-plus/login">Đăng nhập</a>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${session.userLogin}">
+                                    <div class="nav-account-container">
+                                        <a class="sign-up account-info" href="">Thông tin tài khoản</a>
+                                        <a class="sign-in account-cart" href="/cart">Giỏ hàng</a>
+                                        <a class="sign-in account-cart" href="/order/list-order">Đơn mua</a>
+                                        <a style="color: red" class="logOut" href="/user/logOut">Log Out</a>
+                                    </div>
+                                </th:block>
                             </li>
                         </ul>
                     </div>
@@ -102,7 +102,7 @@
     </div>
     <div class="path path-header">
         <div class="grid">
-            <h1><a style="text-decoration: none; color: #000" href="/">Trang chủ</a> / <a style="text-decoration: none; color: #000" href="index.html">Giỏ hàng</a> / Xác nhận đơn hàng</h1>
+            <h1><a style="text-decoration: none; color: #000" href="/">Trang chủ</a> / <a style="text-decoration: none; color: #000" href="/cart">Giỏ hàng</a> / Xác nhận đơn hàng</h1>
         </div>
     </div>
     <div class="products">
@@ -120,27 +120,39 @@
                         <th>Total Price</th>
                     </tr>
                     <tbody id="draw-table">
-                    <th:block th:each="order : ${listOrder}">
+                    <th:block th:each="orderDetail : ${listOrderDetail}">
                         <tr>
                             <td>
                                 <img style="width: 80px"
-                                     th:src="@{'/images/' + ${order.getProduct().getListImgs().get(0).getUrl()}}"
+                                     th:src="@{'/images/' + ${orderDetail.getProduct().getListImgs().get(0).getUrl()}}"
                                      alt="">
                             </td>
                             <td>
-                                <p style="padding: 10px; text-align: left" th:text="${order.getProduct().getProductName()}">Amp Marshal MG10G 10W</p>
+                                <p style="padding: 10px; text-align: left" th:text="${orderDetail.getProduct().getProductName()}">Amp Marshal MG10G 10W</p>
                             </td>
-                            <td style="color: red" th:text="${config.format(order.getProduct().getPrice())}">2.000.000đ</td>
-                            <td th:text="${order.getQuantity()}">1</td>
-                            <td style="color: red" th:text="${config.format(order.getProduct().getPrice() * order.getQuantity())}"></td>
+                            <td style="color: red" th:text="${config.format(orderDetail.getProduct().getPrice())}">2.000.000đ</td>
+                            <td th:text="${orderDetail.getQuantity()}">1</td>
+                            <td style="color: red" th:text="${config.format(orderDetail.getProduct().getPrice() * orderDetail.getQuantity())}"></td>
                         </tr>
                     </th:block>
                     </tbody>
                     <tfoot>
                     <tr>
                         <td colspan="3"></td>
-                        <td style="color: var(--text-color)">Order Total (<span id="checkedItem" th:text="${listOrder.size()}"></span> item(s))</td>
-                        <td style="color:red; font-size: 20px; font-weight: 500;" height="50" id="cartCheckTotal" th:text="${total}"></td>
+                        <td style="color: var(--text-color)">Order Total (<span id="checkedItem" th:text="${listOrderDetail.size()}"></span> item(s))</td>
+                        <td style="color:red; font-size: 20px; font-weight: 500;" height="50" id="cartCheckTotal" th:text="${config.format(total)}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td style="color: var(--text-color)">Address</td>
+                        <td style="font-weight: 500;" height="50"
+                            th:text="${newOrder.getAddress()}">Tây Hồ HN</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td style="color: var(--text-color)">Order Date </td>
+                        <td style="font-weight: 500;" height="50"
+                            th:text="${newOrder.getOrderDate()}">20/5/2012</td>
                     </tr>
                     </tfoot>
                 </table>

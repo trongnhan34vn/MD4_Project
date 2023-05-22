@@ -9,4 +9,5 @@ public interface IProductService extends IGenericService<Product> {
     int getLastProductId();
     List<Product> getHotProducts();
     List<Product> getOutStandingProducts();
+    List<Product> findProductByPageNum(int page, int countPage);
 }

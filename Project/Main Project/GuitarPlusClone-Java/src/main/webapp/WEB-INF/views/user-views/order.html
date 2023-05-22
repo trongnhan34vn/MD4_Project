@@ -72,30 +72,30 @@
                             class="header-navbar-item header-navbar-cart__user">
                         <ul class="header-navbar__features">
                             <li class="nav-account">
-                                <span
-                                ><i class="bi bi-person-circle"></i
-                                ><span id="account"
-                                >Tài khoản</span
-                                ></span
-                                >
+                                <th:block th:if="${session.userLogin}">
+                                        <span><i class="bi bi-person-circle"></i><span
+                                                th:text="${session.userLogin.getFirstName()} + ' ' +${session.userLogin.getLastName()}">
+                                                </span></span>
+                                </th:block>
+                                <th:block th:if="${session.userLogin == null}">
+                                        <span><i class="bi bi-person-circle"></i><span>Tài khoản
+                                                </span></span>
+                                </th:block>
                                 <!-- Regis & Login -->
-                                <div
-                                        class="nav-account-container nav-account-container--cart-products">
-                                    <a
-                                            class="sign-up account-info"
-                                            href="#"
-                                    >Đăng kí</a
-                                    >
-                                    <a
-                                            class="sign-in account-cart"
-                                            href="#"
-                                    >Đăng nhập</a
-                                    >
-                                    <a
-                                            onclick="logOut()"
-                                            class="logOut"
-                                            href="login.html"></a>
-                                </div>
+                                <th:block th:if="${session.userLogin == null}">
+                                    <div class="nav-account-container">
+                                        <a class="sign-up account-info" href="/guitar-plus/register">Đăng kí</a>
+                                        <a class="sign-in account-cart" href="/guitar-plus/login">Đăng nhập</a>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${session.userLogin}">
+                                    <div class="nav-account-container">
+                                        <a class="sign-up account-info" href="">Thông tin tài khoản</a>
+                                        <a class="sign-in account-cart" href="/cart">Giỏ hàng</a>
+                                        <a class="sign-in account-cart" href="/order/list-order">Đơn mua</a>
+                                        <a style="color: red" class="logOut" href="/user/logOut">Log Out</a>
+                                    </div>
+                                </th:block>
                             </li>
                         </ul>
                     </div>
@@ -154,6 +154,7 @@
                 </div>
                 <form action="/order/createNewOrder" method="post" th:object="${order}" class="register-form login-form">
                     <div class="register-form__item">
+                        <input type="hidden" name="total" th:value="${total}">
                         <input th:field="*{address}" name="address" required id="address" placeholder="Address" type="text">
                         <span id="validateEmail"></span>
                     </div>

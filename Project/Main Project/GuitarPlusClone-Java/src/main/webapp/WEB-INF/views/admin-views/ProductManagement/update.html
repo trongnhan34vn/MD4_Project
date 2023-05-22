@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <link rel="stylesheet" href="fonts/themify-icons/themify-icons.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,9 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
     <title>Update Form</title>
-    <link rel="stylesheet" href="https://firebasestorage.googleapis.com/v0/b/md1-test-84536.appspot.com/o/css%2Fbase.css?alt=media&token=80fa56ea-ef5f-4dc3-9a30-40c0d53a0052">
-    <link rel="stylesheet" href="https://firebasestorage.googleapis.com/v0/b/md1-test-84536.appspot.com/o/css%2Fmain.css?alt=media&token=dd806bf1-3fcf-41fa-a075-2f50c614ed58">
-    <link rel="stylesheet" href="https://firebasestorage.googleapis.com/v0/b/md1-test-84536.appspot.com/o/css%2Fcreatproduct.css?alt=media&token=a25bda24-3318-41c6-801c-4382a50e7067">
+    <link rel="stylesheet" th:href="@{/assets/css/createproduct.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/base1.css}">
 </head>
 <body>
 <div class="app">
@@ -70,7 +69,7 @@
         <div class="container">
             <h3>Product Basic Information</h3>
             <form action="/product/update" th:object="${product}" method="post" enctype="multipart/form-data">
-                <table border="1">
+                <table>
                     <tr>
                         <td>
                             <span style="color: red;">* </span>
@@ -161,7 +160,7 @@
             </form>
         </div>
     </div>
-    <div id="footer" class="footer">
+    <div class="footer">
         <div class="grid">
             <div class="footer-container">
                 <div class="footer-logo">

@@ -21,6 +21,8 @@ import rikkei.academy.guitarplusclonejava.service.IMPL.ProductServiceIMPL;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -37,8 +39,23 @@ public class ProductController {
     IProductService productService = new ProductServiceIMPL();
     @GetMapping("/show")
     public String show(Model model) {
-        model.addAttribute("products", productService.findAll());
+        List<Product> productList = productService.findAll();
+        int pageCount = (productList.size()%5)==0?(productList.size()/5):(productList.size()/5 + 1);
+        model.addAttribute("products", productService.findProductByPageNum(1,5));
+        model.addAttribute("pageCount", new Array[pageCount]);
         model.addAttribute("config", new Config());
+        model.addAttribute("pageCurrent", 1);
+        return "/admin-views/ProductManagement/show1";
+    }
+
+    @GetMapping("/page")
+    public String showProductPage(@RequestParam int id, Model model) {
+        List<Product> productList = productService.findAll();
+        int pageCount = (productList.size()%5)==0?(productList.size()/5):(productList.size()/5 + 1);
+        model.addAttribute("products", productService.findProductByPageNum(id,5));
+        model.addAttribute("pageCount", new Array[pageCount]);
+        model.addAttribute("config", new Config());
+        model.addAttribute("pageCurrent", id);
         return "/admin-views/ProductManagement/show1";
     }
 
@@ -119,11 +136,12 @@ public class ProductController {
     }
 
     @GetMapping("/product-detail")
-    public String productDetail(@RequestParam ("id") int id, Model model) {
+    public String productDetail(@ModelAttribute ("messageSuccess") String message ,@RequestParam ("id") int id, Model model) {
         model.addAttribute("product", productService.findById(id));
         model.addAttribute("config", Config.currencyVN);
         Cart cart = new Cart();
         model.addAttribute("cart", cart);
+        model.addAttribute("message", message);
         return "/user-views/product-detail";
     }
 

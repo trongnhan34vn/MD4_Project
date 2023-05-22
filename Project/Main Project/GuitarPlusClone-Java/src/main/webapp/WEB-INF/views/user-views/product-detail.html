@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
     <style>
         /* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 
@@ -262,22 +262,22 @@
             }
         }
     </style>
-    <link rel="stylesheet" th:href="@{/assets/fonts/themify-icons/css/themify-icons.css}" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" th:href="@{/assets/fonts/themify-icons/css/themify-icons.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto:ital,wght@0,500;0,700;1,300&display=swap"
-            rel="stylesheet" />
+            rel="stylesheet"/>
     <link rel="shortcut icon" type="image/x-icon"
-          href="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" />
-    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-free-6.2.0-web/css/all.css}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
+          href="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"/>
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-free-6.2.0-web/css/all.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/assets/css/base1.css}" />
-    <link rel="stylesheet" th:href="@{/assets/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/base1.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/outstanding_product.css}">
 </head>
 
@@ -302,7 +302,7 @@
                         <div class="header-navbar__logo">
                             <a href="/">
                                 <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"
-                                     alt="" />
+                                     alt=""/>
                             </a>
                         </div>
                     </div>
@@ -420,7 +420,7 @@
                                 <li class="nav-search">
                                     <span><i class="bi bi-search"></i></span>
                                     <div class="nav-search-container">
-                                        <input placeholder="Tìm kiếm..." type="text" />
+                                        <input placeholder="Tìm kiếm..." type="text"/>
                                         <button>
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </button>
@@ -428,7 +428,8 @@
                                 </li>
                                 <li class="nav-account">
                                     <th:block th:if="${session.userLogin}">
-                                        <span><i class="bi bi-person-circle"></i><span th:text="${session.userLogin.getFirstName()} + ' ' +${session.userLogin.getLastName()}">
+                                        <span><i class="bi bi-person-circle"></i><span
+                                                th:text="${session.userLogin.getFirstName()} + ' ' +${session.userLogin.getLastName()}">
                                                 </span></span>
                                     </th:block>
                                     <th:block th:if="${session.userLogin == null}">
@@ -445,8 +446,9 @@
                                     <th:block th:if="${session.userLogin}">
                                         <div class="nav-account-container">
                                             <a class="sign-up account-info" href="">Thông tin tài khoản</a>
-                                            <a class="sign-in account-cart" href="">Giỏ hàng</a>
-                                            <a style="color: red" class="logOut" href="/user/">Log Out</a>
+                                            <a class="sign-in account-cart" href="/cart">Giỏ hàng</a>
+                                            <a class="sign-in account-cart" href="/order/list-order">Đơn mua</a>
+                                            <a style="color: red" class="logOut" href="/user/logOut">Log Out</a>
                                         </div>
                                     </th:block>
                                 </li>
@@ -499,7 +501,8 @@
                     <div class="img-display">
                         <div class="img-showcase">
                             <th:block th:each="img : ${product.getListImgs()}">
-                                <img style="height: 531px; object-fit: cover" th:src="@{'/images/' + ${img.getUrl()}}" alt="shoe image" src="">
+                                <img style="height: 531px; object-fit: cover" th:src="@{'/images/' + ${img.getUrl()}}"
+                                     alt="shoe image" src="">
                             </th:block>
                         </div>
                     </div>
@@ -527,7 +530,8 @@
                     </div>
 
                     <div class="product-price">
-                        <h2 class="new-price">Price: <span style="color: red; font-size: 20px" th:text="${config.format(product.getPrice())}">$249.00
+                        <h2 class="new-price">Price: <span style="color: red; font-size: 20px"
+                                                           th:text="${config.format(product.getPrice())}">$249.00
                                     (5%)</span>
                         </h2>
                     </div>
@@ -550,7 +554,7 @@
                         </th:block>
                     </div>
                     <form action="/cart/add" th:object="${cart}" method="post" class="purchase-info">
-                        <input type="number" th:field="*{quantity}" name="quantity" min="1" value="1">
+                        <input type="number" th:field="*{quantity}" name="quantity" min="1">
                         <input type="hidden" name="productId" th:value="${product.productId}">
                         <button type="submit" class="btn btn__buy">
                             Add to Cart <i class="fas fa-shopping-cart"></i>
@@ -577,30 +581,27 @@
                     </div>
                 </div>
             </div>
-            <!-- <th:block th:if="${messageSuccess != null || messageError != null}">
-    <div class="overlay" id="overlay"></div>
-    <div class="modal" id="modal">
-        <button style="cursor: pointer;" class="modal-close-btn" id="close-btn"><i class="fa fa-times" title="閉じる"></i></button>
-        <div th:if="${messageSuccess != null}">
-            <h1 style="text-align: center; line-height: 24px" th:text="${messageSuccess}"></h1>
-            <p style="text-align: center; color: green;"><i style="font-size: 40px" class="bi bi-check-circle"></i></p>
-        </div>
-        <div th:if="${messageError != null}">
-            <h1 style="text-align: center; line-height: 24px" th:text="${messageError}"></h1>
-            <p style="text-align: center; color: red;"><i style="font-size: 40px" class="bi bi-x-circle"></i></p>
-        </div>
-        <div style="display: flex; justify-content: right">
-            <button class="btn" id="okBtn">OK</button>
-        </div>
-    </div>
-</th:block> -->
+            <th:block th:if="${message!=null && message.length() != 0}">
+                <div class="overlay" id="overlay"></div>
+                <div class="modal" id="modal">
+                    <button style="cursor: pointer;" class="modal-close-btn" id="close-btn"><i class="fa fa-times"
+                                                                                               title="閉じる"></i>
+                    </button>
+                    <h2 style="text-align: center; line-height: 24px" th:text="${message}"></h2>
+                    <p style="text-align: center; color: green;"><i style="font-size: 40px"
+                                                                    class="bi bi-check-circle"></i></p>
+                    <div style="display: flex; justify-content: right">
+                        <button class="btn" id="okBtn">OK</button>
+                    </div>
+                </div>
+            </th:block>
         </div>
     </div>
     <div class="footer">
         <div class="grid">
             <div class="footer-container">
                 <div class="footer-logo">
-                    <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" alt="" />
+                    <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" alt=""/>
                 </div>
                 <ul class="footer-social">
                     <li>

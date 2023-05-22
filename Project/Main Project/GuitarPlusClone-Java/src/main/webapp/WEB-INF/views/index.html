@@ -43,7 +43,7 @@
                         <div class="header-navbar__logo">
                             <a href="/">
                                 <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"
-                                     alt="" />
+                                     alt=""/>
                             </a>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                                 <li class="nav-search">
                                     <span><i class="bi bi-search"></i></span>
                                     <div class="nav-search-container">
-                                        <input placeholder="Tìm kiếm..." type="text" />
+                                        <input placeholder="Tìm kiếm..." type="text"/>
                                         <button>
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </button>
@@ -169,7 +169,8 @@
                                 </li>
                                 <li class="nav-account">
                                     <th:block th:if="${session.userLogin}">
-                                        <span><i class="bi bi-person-circle"></i><span th:text="${session.userLogin.getFirstName()} + ' ' +${session.userLogin.getLastName()}">
+                                        <span><i class="bi bi-person-circle"></i><span
+                                                th:text="${session.userLogin.getFirstName()} + ' ' +${session.userLogin.getLastName()}">
                                                 </span></span>
                                     </th:block>
                                     <th:block th:if="${session.userLogin == null}">
@@ -186,7 +187,8 @@
                                     <th:block th:if="${session.userLogin}">
                                         <div class="nav-account-container">
                                             <a class="sign-up account-info" href="">Thông tin tài khoản</a>
-                                            <a class="sign-in account-cart" href="">Giỏ hàng</a>
+                                            <a class="sign-in account-cart" href="/cart">Giỏ hàng</a>
+                                            <a class="sign-in account-cart" href="/order/list-order">Đơn mua</a>
                                             <a style="color: red" class="logOut" href="/user/logOut">Log Out</a>
                                         </div>
                                     </th:block>
@@ -238,25 +240,25 @@
         <div class="slider-wraper">
             <div class="slider-main">
                 <div class="slider-item">
-                    <img th:src="@{/assets/img/slider/item1.jpeg}" alt="" />
+                    <img th:src="@{/assets/img/slider/item1.jpeg}" alt=""/>
                 </div>
                 <div class="slider-item">
-                    <img th:src="@{/assets/img/slider/item2.jpeg}" alt="" />
+                    <img th:src="@{/assets/img/slider/item2.jpeg}" alt=""/>
                 </div>
                 <div class="slider-item">
-                    <img th:src="@{/assets/img/slider/item3.jpeg}" alt="" />
+                    <img th:src="@{/assets/img/slider/item3.jpeg}" alt=""/>
                 </div>
                 <div class="slider-item">
-                    <img th:src="@{/assets/img/slider/item4.jpeg}" alt="" />
+                    <img th:src="@{/assets/img/slider/item4.jpeg}" alt=""/>
                 </div>
                 <div class="slider-item">
-                    <img th:src="@{/assets/img/slider/item5.jpeg}" alt="" />
+                    <img th:src="@{/assets/img/slider/item5.jpeg}" alt=""/>
                 </div>
                 <div class="slider-item">
-                    <img th:src="@{/assets/img/slider/item6.jpeg}" alt="" />
+                    <img th:src="@{/assets/img/slider/item6.jpeg}" alt=""/>
                 </div>
                 <div class="slider-item">
-                    <img th:src="@{/assets/img/slider/item7.webp}" alt="" />
+                    <img th:src="@{/assets/img/slider/item7.webp}" alt=""/>
                 </div>
             </div>
         </div>
@@ -273,14 +275,18 @@
                 <div class="med-rel-prod-slider-wrapper">
                     <div class="med-rel-prod-slider carousel-content">
                         <th:block th:each="otdProduct : ${outStandingProducts}">
-                            <a style="text-decoration: none" th:href="@{/product/product-detail(id=${otdProduct.getProductId()})}" class="med-product-card">
+                            <a style="text-decoration: none"
+                               th:href="@{/product/product-detail(id=${otdProduct.getProductId()})}"
+                               class="med-product-card">
                                 <div class="related-prod-wrapper" style="margin-bottom: 20px; height: 200px;">
                                     <img th:src="@{'/images/' + ${otdProduct.getListImgs().get(0).getUrl()}}"
                                          alt="" class="related-prod-img">
                                 </div>
                                 <div class="related-prod-detail">
-                                    <p style="font-size: 16px; padding-top: 10px" class="rel-med-name text-edit" th:text="${otdProduct.getProductName()}">Subrex Z</p>
-                                    <p style="color: red; text-align: right" class="rel-prod-price" th:text="${config.format(otdProduct.getPrice())}">Rs 250.00</p>
+                                    <p style="font-size: 16px; padding-top: 10px" class="rel-med-name text-edit"
+                                       th:text="${otdProduct.getProductName()}">Subrex Z</p>
+                                    <p style="color: red; text-align: right" class="rel-prod-price"
+                                       th:text="${config.format(otdProduct.getPrice())}">Rs 250.00</p>
                                 </div>
                             </a>
                         </th:block>
@@ -308,7 +314,7 @@
                         <div class="extention-service-wrap">
                             <img class="extention-service-icon"
                                  src="https://theme.hstatic.net/200000388065/1000766714/14/vice_item_1.png?v=111"
-                                 alt="" />
+                                 alt=""/>
                             <h3 class="extention-content">
                                 Giao hàng miễn phí
                             </h3>
@@ -319,7 +325,7 @@
                         <div class="extention-service-wrap">
                             <img class="extention-service-icon"
                                  src="https://theme.hstatic.net/200000388065/1000766714/14/vice_item_2.png?v=111"
-                                 alt="" />
+                                 alt=""/>
                             <h3 class="extention-content">
                                 Hỗ trợ online 24/7
                             </h3>
@@ -330,7 +336,7 @@
                         <div class="extention-service-wrap">
                             <img class="extention-service-icon"
                                  src="https://theme.hstatic.net/200000388065/1000766714/14/vice_item_3.png?v=111"
-                                 alt="" />
+                                 alt=""/>
                             <h3 class="extention-content">
                                 Đặt hàng trực tuyến
                             </h3>
@@ -341,7 +347,7 @@
                         <div class="extention-service-wrap">
                             <img class="extention-service-icon"
                                  src="https://theme.hstatic.net/200000388065/1000766714/14/vice_item_4.png?v=111"
-                                 alt="" />
+                                 alt=""/>
                             <h3 class="extention-content">
                                 Miễn phí đổi trả
                             </h3>
@@ -361,24 +367,28 @@
             </div>
             <div class="best-sale-products">
                 <div class="grid__row draw">
-                    <div class="grid__column-12" th:each="product : ${hotProducts}">
-                        <div class="best-sale-products-item-wrap" >
-                            <div th:style="'background-image: url(/images/'+${product.getListImgs().get(0).getUrl()}+');'"
-                                 class="best-sale-products-img">
+                    <th:block th:each="hotProds : ${hotProducts}">
+                        <div class="grid__column-12">
+                            <div class="best-sale-products-item-wrap">
+                                <div th:style="'background-image: url(/images/'+${hotProds.getListImgs().get(0).getUrl()}+');'"
+                                     class="best-sale-products-img">
 
-                            </div>
-                            <div class="best-sale-products-desc">
-                                <h3 th:text="${product.getProductName()}" class="best-sale-products__title name-products">Amp Marshal MG10G 10W</h3>
-                                <h3 th:text="${config.format(product.getPrice())}" class="best-sale-products__price price">2.000.000 <span>đ</span></h3>
-                            </div>
-                            <a id="add-cart" class="best-sale-products__link cart-link add-cart"
-                               th:href="@{/product/product-detail(id=${product.getProductId()})}">
-                                <div class="best-sale-products__extention">
-                                    <span>Xem chi tiết</span>
                                 </div>
-                            </a>
+                                <div class="best-sale-products-desc">
+                                    <h3 th:text="${hotProds.getProductName()}"
+                                        class="best-sale-products__title name-products">Amp Marshal MG10G 10W</h3>
+                                    <h3 th:text="${config.format(hotProds.getPrice())}"
+                                        class="best-sale-products__price price">2.000.000 <span>đ</span></h3>
+                                </div>
+                                <a id="add-cart" class="best-sale-products__link cart-link add-cart"
+                                   th:href="@{/product/product-detail(id=${hotProds.getProductId()})}">
+                                    <div class="best-sale-products__extention">
+                                        <span>Xem chi tiết</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </th:block>
                 </div>
             </div>
         </div>
@@ -389,7 +399,7 @@
         <div class="grid">
             <div class="footer-container">
                 <div class="footer-logo">
-                    <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" alt="" />
+                    <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" alt=""/>
                 </div>
                 <ul class="footer-social">
                     <li>
@@ -419,10 +429,11 @@
             </div>
         </div>
     </div>
-    <th:block th:if="${message.length() != 0}">
+    <th:block th:if="${message!=null && message.length() != 0}">
         <div class="overlay" id="overlay"></div>
         <div class="modal" id="modal">
-            <button style="cursor: pointer;" class="modal-close-btn" id="close-btn"><i class="fa fa-times" title="閉じる"></i></button>
+            <button style="cursor: pointer;" class="modal-close-btn" id="close-btn"><i class="fa fa-times"
+                                                                                       title="閉じる"></i></button>
             <h1 style="text-align: center; line-height: 24px" th:text="${message}"></h1>
             <p style="text-align: center; color: green;"><i style="font-size: 40px" class="bi bi-check-circle"></i></p>
             <div style="display: flex; justify-content: right">

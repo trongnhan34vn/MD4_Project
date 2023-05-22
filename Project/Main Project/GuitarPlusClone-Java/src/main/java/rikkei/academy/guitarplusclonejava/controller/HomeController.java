@@ -22,7 +22,7 @@ import java.util.List;
 public class HomeController {
     IProductService productService = new ProductServiceIMPL();
     @GetMapping("/")
-    public String home(Model model, HttpSession session, @ModelAttribute("message") String message) {
+    public String home(Model model, HttpSession session, @ModelAttribute("messageSuccess") String message) {
         if (message.length() != 0) {
             model.addAttribute("message", message);
         }

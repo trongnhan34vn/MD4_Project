@@ -12,11 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceIMPL implements IUserService {
-    private static final String QUERY_FIND_ALL = "SELECT * FROM User";
+    private static final String QUERY_FIND_ALL = "SELECT * FROM User where UserID > 0";
     private static final String QUERY_FIND_BY_ID = "{CALL findUserById(?)}";
     private static final String QUERY_FIND_BY_EMAIL = "{CALL findUserByEmail(?)}";
     private static final String QUERY_CREATE_USER = "{CALL createUser(?,?,?,?,?,?,?,?)}";
     private static final String QUERY_CHECK_LOGIN = "{CALL checkLogin(?,?)}";
+    private static final String QUERY_FIND_USER_BY_PAGE = "{CALL pagingAdminUSER(?,?)}";
+    private static final String QUERY_UPDATE_USER = "{CALL updateUser(?,?,?,?,?,?,?,?,?,?)}";
     @Override
     public List<User> findAll() {
         List<User> userList = new ArrayList<>();
@@ -54,6 +56,30 @@ public class UserServiceIMPL implements IUserService {
             createUser(user);
         } else {
             // update
+            updateUser(user);
+        }
+    }
+
+    private void updateUser(User user) {
+        Connection conn = null;
+        try {
+            conn = ConnectionDB.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(QUERY_UPDATE_USER);
+            callableStatement.setInt(1, user.getUserId());
+            callableStatement.setString(2, user.getAvatar());
+            callableStatement.setString(3, user.getFirstName());
+            callableStatement.setString(4, user.getLastName());
+            callableStatement.setString(5, user.getEmail());
+            callableStatement.setBoolean(6,user.isGender());
+            callableStatement.setString(7, user.getBirthDate());
+            callableStatement.setString(8, user.getPassword());
+            callableStatement.setInt(9, user.getRole());
+            callableStatement.setBoolean(10, user.isStatus());
+            callableStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDB.closeConnection(conn);
         }
     }
 
@@ -173,4 +199,37 @@ public class UserServiceIMPL implements IUserService {
         }
         return user;
     }
+
+    @Override
+    public List<User> findUserByPage(int page, int countPage) {
+        Connection conn = null;
+        List<User> userList = new ArrayList<>();
+        try {
+            conn = ConnectionDB.getConnection();
+            CallableStatement callableStatement = conn.prepareCall(QUERY_FIND_USER_BY_PAGE);
+            callableStatement.setInt(1, page);
+            callableStatement.setInt(2, countPage);
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                User user = new User();
+                user.setUserId(resultSet.getInt("UserID"));
+                user.setAvatar(resultSet.getString("Avatar"));
+                user.setFirstName(resultSet.getString("FirstName"));
+                user.setLastName(resultSet.getString("LastName"));
+                user.setEmail(resultSet.getString("Email"));
+                user.setGender(resultSet.getBoolean("Gender"));
+                user.setBirthDate(resultSet.getString("BirthDate"));
+                user.setPassword(resultSet.getString("Password"));
+                user.setRole(resultSet.getInt("Role"));
+                user.setStatus(resultSet.getBoolean("Status"));
+                userList.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDB.closeConnection(conn);
+        }
+        return userList;
+    }
+
 }

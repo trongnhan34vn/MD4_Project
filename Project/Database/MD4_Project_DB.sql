@@ -45,33 +45,41 @@ CREATE TABLE User
 
 CREATE TABLE Cart
 (
-    CartID INT PRIMARY KEY AUTO_INCREMENT,
-    UserID INT,
-    FOREIGN KEY (UserID) REFERENCES User(UserID),
+    CartID    INT PRIMARY KEY AUTO_INCREMENT,
+    UserID    INT,
+    FOREIGN KEY (UserID) REFERENCES User (UserID),
     ProductID INT,
-    FOREIGN KEY (ProductID) REFERENCES Product(ProductID),
-    Quantity INT
+    FOREIGN KEY (ProductID) REFERENCES Product (ProductID),
+    Quantity  INT,
+    Status int not null
 );
-alter table Cart
-add column Status bit default 0;
+
 CREATE TABLE `Order`
 (
-    OrderId INT PRIMARY KEY AUTO_INCREMENT,
-    UserId INT,
-    FOREIGN KEY (UserId) REFERENCES User(UserID),
-    Phone VARCHAR(10),
-    Address TEXT,
-    OrderDate DATETIME DEFAULT NOW(),
-    OrderStatus BIT DEFAULT 0
+    OrderId     INT PRIMARY KEY AUTO_INCREMENT,
+    UserId      INT,
+    FOREIGN KEY (UserId) REFERENCES User (UserID),
+    Phone       VARCHAR(10),
+    Address     TEXT,
+    OrderDate   DATETIME DEFAULT NOW(),
+    OrderStatus BIT      DEFAULT 0
 );
 
 CREATE TABLE OrderDetail
 (
-    ODId INT PRIMARY KEY AUTO_INCREMENT,
-    OrderId INT,
-    FOREIGN KEY (OrderId) REFERENCES `Order`(OrderId),
+    ODId      INT PRIMARY KEY AUTO_INCREMENT,
+    OrderId   INT,
+    FOREIGN KEY (OrderId) REFERENCES `Order` (OrderId),
     ProductId INT,
-    Quantity INT
+    Quantity  INT
+);
+
+CREATE TABLE Feedback
+(
+    FeedbackID INT PRIMARY KEY AUTO_INCREMENT,
+    Message    TEXT,
+    OrderID    INT,
+    FOREIGN KEY (OrderID) REFERENCES `Order` (OrderId)
 );
 
 # Insert
@@ -237,7 +245,7 @@ end //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE findProdOnCartUser (fUId INT,  fPId INT)
+CREATE PROCEDURE findProdOnCartUser(fUId INT, fPId INT)
 BEGIN
     SELECT * FROM (SELECT * FROM Cart WHERE UserID = fUId) AS UserCart WHERE ProductID = fPId;
 end //
@@ -261,12 +269,13 @@ DELIMITER //
 CREATE PROCEDURE updateCart(uCID INT, uQty INT)
 BEGIN
     UPDATE Cart
-        SET Quantity = uQty WHERE CartID = uCID;
+    SET Quantity = uQty
+    WHERE CartID = uCID;
 end //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE removeCartById (idDel INT)
+CREATE PROCEDURE removeCartById(idDel INT)
 BEGIN
     DELETE FROM Cart WHERE CartID = idDel;
 end //
@@ -276,22 +285,23 @@ DELIMITER //
 CREATE PROCEDURE updateStatusCart(idU INT, booU BIT)
 BEGIN
     UPDATE Cart
-        SET Status = booU where CartID = idU ;
+    SET Status = booU
+    where CartID = idU;
 end //
 DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE findSelectedCartInUserCart(uId INT)
 BEGIN
-    SELECT * FROM Cart WHERE UserID = uId AND Cart.Status = TRUE;
+    SELECT * FROM Cart WHERE UserID = uId AND Status = TRUE;
 end //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE createOrder(cUserID INT, cPhone VARCHAR(10), cAddress TEXT, OUT lastId INT)
+CREATE PROCEDURE createOrder(cUserID INT, cPhone VARCHAR(10), cAddress TEXT, cTotal FLOAT, OUT lastId INT)
 BEGIN
-    INSERT INTO `Order` (UserId, Phone, Address) VALUES (cUserID, cPhone, cAddress);
-    SET lastId = LAST_INSERT_ID() ;
+    INSERT INTO `Order` (UserId, Phone, Address, Total) VALUES (cUserID, cPhone, cAddress, cTotal);
+    SET lastId = LAST_INSERT_ID();
 end //
 DELIMITER ;
 
@@ -305,7 +315,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE createOrderDetail(cOID INT, cPID INT, cQuantity INT)
 BEGIN
-    INSERT INTO OrderDetail (OrderId, ProductId, Quantity) VALUES (cOID,cPID,cQuantity);
+    INSERT INTO OrderDetail (OrderId, ProductId, Quantity) VALUES (cOID, cPID, cQuantity);
 end //
 DELIMITER ;
 
@@ -313,5 +323,77 @@ DELIMITER //
 CREATE PROCEDURE findOrderDetailByOrderId(fOID INT)
 BEGIN
     SELECT * FROM OrderDetail WHERE OrderId = fOID;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE findOrderByUserId(fUId INT)
+BEGIN
+    SELECT * FROM `Order` WHERE UserId = fUId;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE pagingAdminProduct(pageNum INT, countPage INT)
+BEGIN
+    DECLARE startNum INT;
+    SET startNum = (pageNum - 1) * countPage;
+    SELECT * FROM Product LIMIT startNum, countPage;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE pagingAdminUSER(pageNum INT, countPage INT)
+BEGIN
+    DECLARE startNum INT;
+    SET startNum = (pageNum - 1) * countPage;
+    SELECT * FROM User WHERE UserID > 0 LIMIT startNum, countPage ;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE updateUser(updateUserId INT, uAva TEXT, uFName VARCHAR(255), uLName VARCHAR(255), uEmail VARCHAR(255), uGender BIT, uBirthDate DATE, uPassword VARCHAR(255), uRole INT, uStatus BIT)
+BEGIN
+    UPDATE User
+        SET Avatar = uAva, FirstName = uFName, LastName = uLName, Email = uEmail, Gender = uGender, BirthDate = uBirthDate, Password = uPassword, Role = uRole, User.Status = uStatus WHERE UserID = updateUserId;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE pagingAdminOrder(pageNum INT, countPage INT)
+BEGIN
+    DECLARE startNum INT;
+    SET startNum = (pageNum - 1) * countPage;
+    SELECT * FROM `Order` WHERE UserID > 0 LIMIT startNum, countPage ;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE findAllOrder()
+BEGIN
+    SELECT * FROM `Order`;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE updateStatOrder(uOrdStat INT, uOrdID INT)
+BEGIN
+    UPDATE `Order`
+        SET OrderStatus = uOrdStat
+    WHERE OrderId = uOrdID;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE createFeed(cMessage TEXT, cOID INT)
+BEGIN
+    INSERT INTO Feedback (Message, OrderID) VALUES (cMessage,cOID);
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE findFeedByOrderId(fOID INT)
+BEGIN
+    SELECT * FROM Feedback WHERE OrderID = fOID;
 end //
 DELIMITER ;

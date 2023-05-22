@@ -3,23 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Product Management</title>
-    <link rel="stylesheet" th:href="@{/assets/fonts/themify-icons/themify-icons.css}" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>User Management</title>
+    <link rel="stylesheet" th:href="@{/assets/fonts/themify-icons/themify-icons.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto:ital,wght@0,500;0,700;1,300&display=swap"
-            rel="stylesheet" />
+            rel="stylesheet"/>
     <link rel="shortcut icon" type="image/x-icon"
-          href="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" />
-    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-free-6.2.0-web/css/all.css}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
+          href="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111"/>
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-free-6.2.0-web/css/all.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/assets/css/base1.css}" />
-    <link rel="stylesheet" th:href="@{/assets/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/base1.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/outstanding_product.css}">
     <link rel="stylesheet" th:href="@{/assets/css/admin.css}">
     <style>
@@ -89,6 +89,147 @@
             color: #000;
             transition: all ease 0.3s;
         }
+
+        .under-nav {
+            padding-top: 66px;
+        }
+
+        .product-admin {
+            padding: 30px;
+        }
+
+        :root {
+            --primary: #23adad;
+            --greyLight: #23adade1;
+            --greyLight-2: #cbe0dd;
+            --greyDark: #2d4848;
+        }
+
+        /**,*/
+        /**::before,*/
+        /**::after {*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*    box-sizing: inherit;*/
+        /*}*/
+        /*.container {*/
+        /*    min-height: 100vh;*/
+        /*    display: flex;*/
+        /*    flex-direction: column;*/
+        /*    justify-content: center;*/
+        /*    align-items: center;*/
+        /*    background: var(--greyLight-2);*/
+        /*    color: var(--greyDark);*/
+        /*}*/
+
+        ul {
+            list-style-type: none;
+        }
+
+        .items-list {
+            max-width: 90vw;
+            margin: 2rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 3rem;
+            justify-content: center;
+            align-content: center;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .items-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .item {
+            width: 10rem;
+            height: 10rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--greyDark);
+            cursor: pointer;
+        }
+
+        .item span {
+            background: #ffffff;
+            box-shadow: 0 0.8rem 2rem rgba(90, 97, 129, 0.05);
+            border-radius: 0.6rem;
+            padding: 2rem;
+            font-size: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .item:hover span {
+            transform: scale(1.2);
+            color: var(--primary);
+        }
+
+        .item p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: var(--greyLight);
+        }
+
+        .page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 5rem;
+            margin: 3rem;
+            border-radius: 0.6rem;
+            background: #ffffff;
+            box-shadow: 0 0.8rem 2rem rgba(90, 97, 129, 0.05);
+        }
+
+        .page__numbers, .page__btn, .page__dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0.8rem;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .page__dots {
+            width: 2.6rem;
+            height: 2.6rem;
+            color: var(--greyLight);
+            cursor: initial;
+        }
+
+        .page__numbers {
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.4rem;
+        }
+
+        .page__numbers:hover {
+            color: var(--primary);
+        }
+
+        .page__numbers.active {
+            color: #ffffff;
+            background: var(--primary);
+            font-weight: 600;
+            border: 1px solid var(--primary);
+        }
+
+        .page__btn {
+            color: var(--greyLight);
+            pointer-events: none;
+        }
+
+        .page__btn.active {
+            color: var(--greyDark);
+            pointer-events: initial;
+        }
+
+        .page__btn.active:hover {
+            color: var(--primary);
+        }
     </style>
 </head>
 
@@ -113,14 +254,14 @@
                 <h3 class="sidebar-title">
                     Product
                 </h3>
-                <a style="opacity: 1" href="/product/show"><i class="fa-solid fa-cube"></i>Product Management</a>
+                <a  href="/product/show"><i class="fa-solid fa-cube"></i>Product Management</a>
                 <a href=""><i class="fa-solid fa-rectangle-list"></i>Catalogs Management</a>
             </div>
             <div class="sidebar-item">
                 <h3 class="sidebar-title">
                     User
                 </h3>
-                <a href="/user/showAllMng"><i class="fa-solid fa-circle-user"></i>User Management</a>
+                <a style="opacity: 1" href="/user/showAllMng"><i class="fa-solid fa-circle-user"></i>User Management</a>
                 <a href="/order/order-mng"><i class="fa-solid fa-circle-user"></i>Order Management ()</a>
             </div>
             <div class="sidebar-item sidebar-item_last">
@@ -129,7 +270,6 @@
         </div>
     </section>
     <!-- Sidebar -->
-    <!-- Wrap-beside -->
     <div class="wrap-beside">
         <div class="header">
             <div class="header-navbar-feat header-navbar-feat--index">
@@ -145,8 +285,8 @@
                         </div>
                     </div> -->
                             <div class="header-navbar-item ">
-                                <h1 class="header-navbar-cart-item admin-title">
-                                    Admin
+                                <h1 class="header-navbar-cart-item admin-title admin-title_resize">
+                                    User Management
                                 </h1>
                             </div>
                         </div>
@@ -172,127 +312,82 @@
             </div>
         </div>
         <div class="under-nav">
-            <div style="background-image: url('https://theme.hstatic.net/200000388065/1000766714/14/background_banner.jpg?v=111')"
-                 class="hello">
-                <div class="path admin-hello">
-                    <h1 style="color: #fff;">
-                        Guitar Plus Hello Admin!
-                    </h1>
-                </div>
-            </div>
-            <div style="padding: 30px;" class="register product-lists product-admin">
+            <div class="register product-lists product-admin">
                 <div class="grid">
-                    <div class="grid-2">
-                        <div class="product-list-wrap admin-table">
-                            <table class="products-table" style="width: 100%; text-align: center;">
-                                <thead>
-                                <tr style="
-                                            height: 50px;
-                                            border-bottom: 1px solid #f5f6f9;
-                                        ">
-                                    <th width="40%">Name</th>
-                                    <th>Catalog</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td style="vertical-align: middle;">
-                                        <div style="display: flex; align-items: center;">
-                                            <img style="width: 80px; height: 80px; object-fit: cover"
-                                                 alt="">
-                                            <p style="padding: 10px; display: inline;"
-                                               >Guitar Plus F0</p>
-                                        </div>
-                                    </td>
-                                    <td>Guitar</td>
-                                    <td>7.000.000</td>
-                                    <td>100</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="view-more">
-                                <a href="">View more</i></a>
-                            </div>
-                        </div>
-                        <div class="product-list-wrap admin-table">
-                            <table class="products-table" style="width: 100%; text-align: center;">
-                                <thead>
-                                <tr style="
-                                            height: 50px;
-                                            border-bottom: 1px solid #f5f6f9;
-                                        ">
-                                    <th width="40%">Name</th>
-                                    <th>Catalog</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                </tr>
-                                </thead>
-                                <tbody id="draw-table">
-                                <tr>
-                                    <td style="vertical-align: middle;">
-                                        <div style="display: flex; align-items: center;">
-                                            <img style="width: 80px; height: 80px; object-fit: cover"
-                                                 alt="">
-                                            <p style="padding: 10px; display: inline;"
-                                               >Guitar Plus F0</p>
-                                        </div>
-                                    </td>
-                                    <td>Guitar</td>
-                                    <td>7.000.000</td>
-                                    <td>100</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="view-more">
-                                <a href="">View more</i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-list-wrap admin-table">
+                    <div class="product-list-wrap">
                         <table class="products-table" style="width: 100%; text-align: center;">
                             <thead>
                             <tr style="
-                                        height: 50px;
-                                        border-bottom: 1px solid #f5f6f9;
-                                    ">
-                                <th width="40%">Name</th>
-                                <th>Catalog</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
+                                                height: 50px;
+                                                border-bottom: 1px solid #f5f6f9;
+                                            ">
+                                <th width="35%" colspan="2">Name</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>BirthDate</th>
+                                <th>Role</th>
+                                <th>Status</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
+                            <tbody id="draw-table">
+                            <tr th:each="user : ${listUsers}">
                                 <td style="vertical-align: middle;">
-                                    <div style="display: flex; align-items: center;">
-                                        <img style="width: 80px; height: 80px; object-fit: cover"
+                                    <th:block th:if="${user.getAvatar() == null}">
+                                        <img style="width: 50px; height: 50px; object-fit: cover"
+                                             th:src="@{/assets/img/logo/img_avatar.png}"
                                              alt="">
-                                        <p style="padding: 10px; display: inline;"
-                                           >Guitar Plus F0</p>
-                                    </div>
+                                    </th:block>
+                                    <th:block th:if="${user.getAvatar() != null}">
+                                        <img style="width: 50px; height: 50px; object-fit: cover"
+                                             th:src="@{'/images/' + ${user.getAvatar()}}"
+                                             alt="">
+                                    </th:block>
                                 </td>
-                                <td>Guitar</td>
-                                <td>7.000.000</td>
-                                <td>100</td>
+                                <td style="text-align: left"><p class="text-edit"
+                                                                th:text="${user.getFirstName() + ' ' + user.getLastName()}"></p>
+                                </td>
+
+                                <td th:text="${user.getEmail()}"></td>
+                                <td th:text="${user.isGender()? 'nam':'nữ'}"></td>
+                                <td style="color: red" th:text="${user.getBirthDate()}"></td>
+                                <td th:text="${(user.getRole() == 0)?'admin':'user'}">100</td>
+                                <td>
+                                    <th:block th:if="${user.isStatus()}">
+                                        <span style="color: green">Active <i class="bi bi-check-circle-fill"></i></span>
+                                    </th:block>
+                                    <th:block th:unless="${user.isStatus()}">
+                                        <span style="color: red">Block <i class="bi bi-x-circle-fill"></i></span>
+                                    </th:block>
+                                </td>
+                                <td>
+                                    <button><a th:href="@{/user/block(id=${user.getUserId()},pageCurrent=${pageCurrent})}"><span>Block</span></a>
+                                    </button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
-                        <div class="view-more">
-                            <a href="">View more</i></a>
-                        </div>
+                    </div>
+                    <div id="app" class="container">
+                        <ul class="page">
+                            <li class="page__btn"><span class="material-icons">chevron_left</span></li>
+                            <th:block th:each="page,pageStat : ${pageCount}">
+                                <li class="page__numbers"
+                                    th:classappend="${(pageCurrent == pageStat.count)?'active':''}">
+                                    <a style="display: flex; justify-content: center;align-items: center;text-decoration: none; color: var(--primary-color); width: 100%; height: 100%"
+                                       th:href="@{/user/page(id=${pageStat.count})}"><span
+                                            th:text="${pageStat.index + 1}"></span></a></li>
+                            </th:block>
+                            <li class="page__btn"><span class="material-icons">chevron_right</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-
-
         <div class="footer">
             <div class="grid">
                 <div class="footer-container">
                     <div class="footer-logo">
-                        <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" alt="" />
+                        <img src="https://theme.hstatic.net/200000388065/1000766714/14/logo.png?v=111" alt=""/>
                     </div>
                     <ul class="footer-social">
                         <li>
@@ -324,7 +419,8 @@
         </div>
         <div class="overlay" id="overlay"></div>
     </div>
-    <!-- Wrap-beside -->
+    <!-- Header -->
+
     <div class="modal" id="modal">
         <button style="cursor: pointer;" class="modal-close-btn" id="close-btn"><i class="fa fa-times"
                                                                                    title="閉じる"></i></button>

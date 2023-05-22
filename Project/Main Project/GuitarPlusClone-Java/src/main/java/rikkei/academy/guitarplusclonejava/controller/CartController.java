@@ -14,7 +14,6 @@ import rikkei.academy.guitarplusclonejava.service.IMPL.ProductServiceIMPL;
 import rikkei.academy.guitarplusclonejava.service.IProductService;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class CartController {
     ICartService cartService = new CartServiceIMPL();
 
     @PostMapping("/add")
-    public String addToCart(Model model, @ModelAttribute("cart") Cart newCart, @RequestParam("productId") String productId, HttpSession request, RedirectAttributes redirectAttributes) {
+    public String addToCart(@ModelAttribute("cart") Cart newCart, @RequestParam("productId") String productId, HttpSession request, RedirectAttributes redirectAttributes) {
         User user = (User) request.getAttribute("userLogin");
         if (user != null) {
             newCart.setUserId(user.getUserId());
@@ -56,7 +55,7 @@ public class CartController {
             return "/user-views/cart";
         } else {
 //            model.addAttribute("messageSignUp", "Vui lòng đăng nhập!");
-            return "redirect:/current-page-url";
+            return "redirect:/";
         }
     }
 
